@@ -1,0 +1,5 @@
+rootProject.name = 'Planner'
+include 'Commons'
+include 'Server'
+include 'Client'
+
