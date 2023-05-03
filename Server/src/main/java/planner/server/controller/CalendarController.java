@@ -4,9 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import planner.commons.CalendarItem;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @RestController
 public class CalendarController {
@@ -15,7 +13,7 @@ public class CalendarController {
     public List<CalendarItem> getCalendar() {
         System.out.println("Hello");
         List<CalendarItem> calendarItems = new ArrayList<>();
-        calendarItems.add(new CalendarItem(0, "Title", new Date(2023, 2, 1),
+        calendarItems.add(new CalendarItem(0, "Title", new GregorianCalendar(2023, Calendar.MARCH, 1),
                 "startTime", "endTime", "#ffffff", new ArrayList<>()));
         return calendarItems;
     }

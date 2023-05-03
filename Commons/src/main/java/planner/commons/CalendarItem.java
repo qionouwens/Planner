@@ -1,13 +1,11 @@
 package planner.commons;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class CalendarItem {
     private int id;
     private String title;
-    private Date date;
+    private GregorianCalendar date;
     private String startTime;
     private String endTime;
     private String colour;
@@ -16,7 +14,7 @@ public class CalendarItem {
     public CalendarItem() {
     }
 
-    public CalendarItem(int id, String title, Date date, String startTime, String endTime, String colour, List<Todo> todoList) {
+    public CalendarItem(int id, String title, GregorianCalendar date, String startTime, String endTime, String colour, List<Todo> todoList) {
         this.id = id;
         this.title = title;
         this.date = date;
@@ -42,11 +40,11 @@ public class CalendarItem {
         this.title = title;
     }
 
-    public Date getDate() {
+    public GregorianCalendar getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(GregorianCalendar date) {
         this.date = date;
     }
 
