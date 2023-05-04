@@ -13,6 +13,7 @@ public class CreateDatabase {
 
     public void create() {
         createCalendarItem();
+        createDateTable();
         createTodo();
         createExpenseCategory();
         createIncomeExpense();
@@ -35,10 +36,14 @@ public class CreateDatabase {
         String sql = "CREATE TABLE IF NOT EXISTS calendarItem ( " +
                 "calendar_id INTEGER PRIMARY KEY, " +
                 "title TEXT, " +
-                "calendar_date TEXT, " +
-                "starttime TEXT, " +
-                "endtime TEXT, " +
-                "color TEXT" +
+                "date_id INTEGER, " +
+                "starttime_hour INTEGER, " +
+                "starttime_minute INTEGER, " +
+                "endtime_hour INTEGER, " +
+                "endtime_minute INTEGER, " +
+                "color TEXT, " +
+                "FOREIGN KEY (date_id) " +
+                "   REFERENCES dateTable(date_id) " +
                 ");";
 
         try {
@@ -50,14 +55,32 @@ public class CreateDatabase {
         }
     }
 
+    private void createDateTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS dateTable ( " +
+                "date_id INTEGER PRIMARY KEY, " +
+                "day INTEGER, " +
+                "month INTEGER, " +
+                "year INTEGER " +
+                ");";
+        try {
+            Statement stmt = connection.createStatement();
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            System.out.println("date");
+        }
+    }
+
     private void createTodo() {
         String sql = "CREATE TABLE IF NOT EXISTS todo ( " +
                 "id INTEGER PRIMARY KEY, " +
                 "description TEXT, " +
-                "duedate TEXT, " +
+                "date_id INTEGER, " +
                 "calendar_id INTEGER, " +
                 "FOREIGN KEY (calendar_id) " +
-                "   REFERENCES calendarItem (calendar_id) " +
+                "   REFERENCES calendarItem (calendar_id), " +
+                "FOREIGN KEY (date_id) " +
+                "   REFERENCES dateTable(date_id) " +
                 ");";
 
         try {
@@ -91,8 +114,11 @@ public class CreateDatabase {
                 "isIncome INTEGER, " +
                 "amount INTEGER, " +
                 "category_id INTEGER, " +
-                "FOREIGN KEY (category_id)" +
-                "   REFERENCES expenseCategory (category_id) " +
+                "date_id INTEGER, " +
+                "FOREIGN KEY (category_id) " +
+                "   REFERENCES expenseCategory(category_id), " +
+                "FOREIGN KEY (date_id) " +
+                "   REFERENCES dateTable(date_id) " +
                 ");";
 
         try {
@@ -128,9 +154,9 @@ public class CreateDatabase {
                 "priority_id INTEGER, " +
                 "type_id INTEGER, " +
                 "FOREIGN KEY (priority_id) " +
-                "   REFERENCES priority (priority_id), " +
+                "   REFERENCES priority(priority_id), " +
                 "FOREIGN KEY (type_id) " +
-                "   REFERENCES groceryType (type_id)" +
+                "   REFERENCES groceryType(type_id)" +
                 ");";
         try {
             Statement stmt = connection.createStatement();
@@ -236,7 +262,10 @@ public class CreateDatabase {
         String sql = "CREATE TABLE IF NOT EXISTS training ( " +
                 "training_id INTEGER PRIMARY KEY, " +
                 "training_type TEXT, " +
-                "description TEXT " +
+                "description TEXT, " +
+                "date_id INTEGER, " +
+                "FOREIGN KEY (date_id) " +
+                "   REFERENCES dateTable(date_id) " +
                 ");";
         try {
             Statement stmt = connection.createStatement();
