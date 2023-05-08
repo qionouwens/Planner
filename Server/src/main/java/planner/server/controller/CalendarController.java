@@ -19,6 +19,11 @@ public class CalendarController {
         return calendarService.getByWeek(calendar);
     }
 
+    @GetMapping("/{id}")
+    public CalendarItem getById(@PathVariable("id") int id) {
+        return calendarService.getById(id);
+    }
+
     @PostMapping(path = {"", "/"})
     public CalendarItem addCalendar(@RequestBody CalendarItem calendarItem) {
         return calendarService.addCalendar(calendarItem);

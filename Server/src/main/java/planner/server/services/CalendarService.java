@@ -24,6 +24,10 @@ public class CalendarService {
         return calendarDBController.getEndOfMonth(startOfWeek);
     }
 
+    public CalendarItem getById(int id) {
+        return calendarDBController.getById(id);
+    }
+
     public CalendarItem addCalendar(CalendarItem calendarItem) {
         int[] date = DateConversion.getDateArray(calendarItem.getDate());
         calendarDBController.add(calendarItem.getTitle(), date[0], date[1], date[2], calendarItem.getStartTime(),
