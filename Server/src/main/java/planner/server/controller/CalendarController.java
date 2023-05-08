@@ -1,5 +1,6 @@
 package planner.server.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import planner.commons.CalendarItem;
 import planner.commons.helper.DateConversion;
@@ -13,19 +14,19 @@ public class CalendarController {
     private final CalendarService calendarService = new CalendarService();
 
     @GetMapping("/{year}/{month}/{day}")
-    public List<CalendarItem> getCalendarForWeek(@PathVariable("year") int year, @PathVariable("month") int month,
-                                                 @PathVariable("day") int day) {
+    public ResponseEntity<List<CalendarItem>> getCalendarForWeek(@PathVariable("year") int year, @PathVariable("month") int month,
+                                                           @PathVariable("day") int day) {
         GregorianCalendar calendar = DateConversion.getDate(year, month, day);
-        return calendarService.getByWeek(calendar);
+        return ResponseEntity.ok(calendarService.getByWeek(calendar));
     }
 
     @GetMapping("/{id}")
-    public CalendarItem getById(@PathVariable("id") int id) {
-        return calendarService.getById(id);
+    public ResponseEntity<CalendarItem> getById(@PathVariable("id") int id) {
+        return ResponseEntity.ok(calendarService.getById(id));
     }
 
     @PostMapping(path = {"", "/"})
-    public CalendarItem addCalendar(@RequestBody CalendarItem calendarItem) {
-        return calendarService.addCalendar(calendarItem);
+    public ResponseEntity<CalendarItem> addCalendar(@RequestBody CalendarItem calendarItem) {
+        return ResponseEntity.ok(calendarService.addCalendar(calendarItem));
     }
 }
