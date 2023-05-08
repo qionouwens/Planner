@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import planner.client.serverUtils.CalendarServerUtils;
 
 import java.io.IOException;
 
@@ -18,6 +19,8 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
+        CalendarServerUtils calendarServerUtils = new CalendarServerUtils();
+        calendarServerUtils.getById(3);
         launch();
     }
 }
