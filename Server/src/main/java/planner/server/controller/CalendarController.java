@@ -13,6 +13,7 @@ public class CalendarController {
     @GetMapping("/calendar/{year}/{month}/{day}")
     public List<CalendarItem> getCalendarForWeek(@PathVariable("year") int year, @PathVariable("month") int month,
                                                  @PathVariable("day") int day) {
+        return null;
     }
 
 }

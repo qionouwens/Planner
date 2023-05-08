@@ -10,7 +10,7 @@ import java.util.*;
 
 public class CalendarDBController {
     private final Connect connect;
-    private DateDBController dateDBController;
+    private final DateDBController dateDBController;
 
     public CalendarDBController() {
         connect = new Connect();
@@ -72,11 +72,35 @@ public class CalendarDBController {
             stmt.setInt(5, startOfWeek.get(Calendar.DAY_OF_MONTH) + 6);
             stmt.setInt(6, startOfWeek.get(Calendar.DAY_OF_MONTH) + 6);
             ResultSet result = stmt.executeQuery();
-            boolean cont;
-            do {
-                calendarItems.add(getFromResultSet(result));
-                cont = result.next();
-            } while (cont);
+            calendarItems = getListFromResultSet(result);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return calendarItems;
+    }
+
+    public List<CalendarItem> getEndOfMonth(GregorianCalendar startOfWeek) {
+        List<CalendarItem> calendarItems = new ArrayList<>();
+        String sql = "SELECT calendar_id, title, c.date_id, starttime_hour, starttime_minute, endtime_hour, endtime_minute, color " +
+                " FROM calendarItem c " +
+                " JOIN dateTable d ON c.date_id = d.date_id " +
+                " WHERE ((year = ? AND month = ? AND (day > ? OR day = ?) AND (day < ? OR day = ?)) OR " +
+                "       (year = ? AND month = ? AND (day > 1 OR day = 1) AND (day < ? OR day = ?))) ";
+        try {
+            PreparedStatement stmt = connect.getConnection().prepareStatement(sql);
+            stmt.setInt(1, startOfWeek.get(Calendar.YEAR));
+            stmt.setInt(2, startOfWeek.get(Calendar.MONTH));
+            stmt.setInt(3, startOfWeek.get(Calendar.DAY_OF_MONTH));
+            stmt.setInt(4, startOfWeek.get(Calendar.DAY_OF_MONTH));
+            stmt.setInt(5, startOfWeek.getActualMaximum(Calendar.DAY_OF_MONTH));
+            stmt.setInt(6, startOfWeek.getActualMaximum(Calendar.DAY_OF_MONTH));
+            startOfWeek.add(Calendar.DATE, 6);
+            stmt.setInt(7, startOfWeek.get(Calendar.YEAR));
+            stmt.setInt(8, startOfWeek.get(Calendar.MONTH));
+            stmt.setInt(9, startOfWeek.get(Calendar.DAY_OF_MONTH));
+            stmt.setInt(10, startOfWeek.get(Calendar.DAY_OF_MONTH));
+            ResultSet result = stmt.executeQuery();
+            calendarItems = getListFromResultSet(result);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -97,5 +121,15 @@ public class CalendarDBController {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    private List<CalendarItem> getListFromResultSet(ResultSet result) throws SQLException {
+        List<CalendarItem> calendarItems = new ArrayList<>();
+        boolean cont;
+        do {
+            calendarItems.add(getFromResultSet(result));
+            cont = result.next();
+        } while (cont);
+        return calendarItems;
     }
 }
