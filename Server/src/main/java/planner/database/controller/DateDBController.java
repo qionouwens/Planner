@@ -51,6 +51,7 @@ public class DateDBController {
         String sql = "SELECT * FROM dateTable WHERE date_id = ? ";
         try {
             PreparedStatement stmt = connection.getConnection().prepareStatement(sql);
+            stmt.setInt(1, id);
             ResultSet result = stmt.executeQuery();
             return DateConversion.getDate(
                     result.getInt("year"), result.getInt("month"), result.getInt("day"));
