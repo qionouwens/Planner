@@ -10,6 +10,13 @@ public class DateConversion {
         return calendar;
     }
 
+    public static int[] getDateArray(GregorianCalendar calendar) {
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        return new int[]{year, month, day};
+    }
+
     public static GregorianCalendar getFirstDay(GregorianCalendar calendar) {
         calendar.setWeekDate(calendar.getWeekYear(), calendar.get(Calendar.WEEK_OF_YEAR), Calendar.MONDAY);
         return calendar;

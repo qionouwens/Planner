@@ -52,9 +52,31 @@ public class CalendarDBController {
             stmt.setInt(5, end.nextInt());
             stmt.setInt(6, end.nextInt());
             stmt.setString(7, colour);
+            stmt.execute();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public int getId(int year, int month, int day, String startTime) {
+        String sql = "SELECT c.calendar_id FROM calendarItem c " +
+                "   JOIN dateTable d ON c.date_id = d.date_id " +
+                "   WHERE year = ? AND month = ? AND day = ? AND starttime_hour = ? AND starttime_minute = ? ";
+        try {
+            PreparedStatement stmt = connect.getConnection().prepareStatement(sql);
+            stmt.setInt(1, year);
+            stmt.setInt(2, month);
+            stmt.setInt(3, day);
+            Scanner start = new Scanner(startTime);
+            start.useDelimiter(":");
+            stmt.setInt(4, start.nextInt());
+            stmt.setInt(5, start.nextInt());
+            ResultSet result = stmt.executeQuery();
+            return result.getInt("calendar_id");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return -1;
     }
 
     public List<CalendarItem> getMiddleWeek(GregorianCalendar startOfWeek) {
