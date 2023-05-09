@@ -1,7 +1,6 @@
-package planner.commons;
+package planner.commons.helper;
 
 import org.junit.jupiter.api.Test;
-import planner.commons.helper.DateConversion;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
