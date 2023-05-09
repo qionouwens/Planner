@@ -111,14 +111,14 @@ public class CalendarDBController {
         try {
             PreparedStatement stmt = connect.getConnection().prepareStatement(sql);
             stmt.setInt(1, startOfWeek.get(Calendar.YEAR));
-            stmt.setInt(2, startOfWeek.get(Calendar.MONTH));
+            stmt.setInt(2, startOfWeek.get(Calendar.MONTH) + 1);
             stmt.setInt(3, startOfWeek.get(Calendar.DAY_OF_MONTH));
             stmt.setInt(4, startOfWeek.get(Calendar.DAY_OF_MONTH));
             stmt.setInt(5, startOfWeek.getActualMaximum(Calendar.DAY_OF_MONTH));
             stmt.setInt(6, startOfWeek.getActualMaximum(Calendar.DAY_OF_MONTH));
             startOfWeek.add(Calendar.DATE, 6);
             stmt.setInt(7, startOfWeek.get(Calendar.YEAR));
-            stmt.setInt(8, startOfWeek.get(Calendar.MONTH));
+            stmt.setInt(8, startOfWeek.get(Calendar.MONTH) + 1);
             stmt.setInt(9, startOfWeek.get(Calendar.DAY_OF_MONTH));
             stmt.setInt(10, startOfWeek.get(Calendar.DAY_OF_MONTH));
             ResultSet result = stmt.executeQuery();
@@ -147,7 +147,7 @@ public class CalendarDBController {
 
     private List<CalendarItem> getListFromResultSet(ResultSet result) throws SQLException {
         List<CalendarItem> calendarItems = new ArrayList<>();
-        boolean cont;
+        boolean cont = result.next();
         do {
             calendarItems.add(getFromResultSet(result));
             cont = result.next();

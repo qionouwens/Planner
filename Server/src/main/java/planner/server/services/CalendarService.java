@@ -18,7 +18,7 @@ public class CalendarService {
     }
     public List<CalendarItem> getByWeek(GregorianCalendar calendar) {
         GregorianCalendar startOfWeek = DateConversion.getFirstDay(calendar);
-        if (startOfWeek.getActualMaximum(Calendar.DAY_OF_MONTH) - startOfWeek.get(Calendar.DAY_OF_MONTH) < 6) {
+        if (startOfWeek.getActualMaximum(Calendar.DAY_OF_MONTH) - startOfWeek.get(Calendar.DAY_OF_MONTH) > 6) {
             return calendarDBController.getMiddleWeek(startOfWeek);
         }
         return calendarDBController.getEndOfMonth(startOfWeek);

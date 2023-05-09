@@ -1,6 +1,16 @@
 package planner.client.serverUtils;
 
 import planner.commons.CalendarItem;
+import planner.commons.helper.ClassParser;
+import planner.commons.helper.JSONConverter;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.List;
 
 
 public class CalendarServerUtils {
@@ -11,6 +21,46 @@ public class CalendarServerUtils {
     }
 
     public CalendarItem getById(int id) {
-        return null;
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(serverUtils.getServer() + "/api/calendar/" + id))
+                    .GET()
+                    .build();
+            HttpClient client = HttpClient.newHttpClient();
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return ClassParser.parseCalendar(response.body());
+        } catch (URISyntaxException | IOException | InterruptedException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public CalendarItem addCalendar(CalendarItem calendarItem) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(serverUtils.getServer() + "/api/calendar/"))
+                    .header("Accept", "application/json")
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(JSONConverter.convertCalendar(calendarItem)))
+                    .build();
+            HttpClient client = HttpClient.newHttpClient();
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return ClassParser.parseCalendar(response.body());
+        } catch (URISyntaxException | IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<CalendarItem> getCalendarForWeek(int year, int month, int day) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(serverUtils.getServer() + "/api/calendar/" + year + "/" + month + "/" + day))
+                    .GET()
+                    .build();
+            HttpClient client = HttpClient.newHttpClient();
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return ClassParser.parseCalendarList(response.body());
+        } catch (URISyntaxException | IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
