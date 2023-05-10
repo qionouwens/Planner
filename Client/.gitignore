@@ -3,6 +3,7 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+Client/src/main/java/planner/client/RunClientCommands.java
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

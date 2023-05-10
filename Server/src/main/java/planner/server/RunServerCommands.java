@@ -10,7 +10,7 @@ public class RunServerCommands {
     public static void main(String[] args){
         DateDBController date = new DateDBController();
         CalendarDBController calendarDBController = new CalendarDBController();
-        calendarDBController.add("testTitle", 2023, 6, 4, "9:15", "11:15", "#ffffff");
+        calendarDBController.add("testTitle", 2023, 5, 14, "13:15", "15:15", "#ff0000");
 
     }
 }

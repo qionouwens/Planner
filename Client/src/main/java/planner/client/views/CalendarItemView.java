@@ -33,6 +33,7 @@ public class CalendarItemView extends Pane {
         title.setContentDisplay(ContentDisplay.CENTER);
         title.setAlignment(Pos.CENTER);
         title.setFont(new Font(24));
+        title.setWrapText(true);
         this.getChildren().add(title);
     }
 }

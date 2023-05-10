@@ -13,6 +13,7 @@ public class RunClientCommands {
         for (CalendarItem calendar :
                 calendarItems) {
             System.out.println(calendar.toString());
+            System.out.println(calendar.toString());
         }
     }
 }

@@ -19,6 +19,9 @@ public class ClassParser {
     }
     public static CalendarItem parseCalendar(String calendarString) {
         Scanner scanner = new Scanner(calendarString);
+        if (calendarString.equals("[null]")) {
+            return null;
+        }
         scanner.useDelimiter(",");
         String id = scanner.next();
         String title = scanner.next();

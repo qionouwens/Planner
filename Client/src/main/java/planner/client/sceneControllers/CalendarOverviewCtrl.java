@@ -4,11 +4,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import planner.client.MainUICtrl;
 import planner.client.serverUtils.CalendarServerUtils;
 import planner.client.views.CalendarItemView;
 import planner.commons.CalendarItem;
 import planner.commons.helper.DateConversion;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -41,23 +43,27 @@ public class CalendarOverviewCtrl {
 
     private GregorianCalendar currentDate;
     private Stage stage;
+    private MainUICtrl mainUICtrl;
 
     public CalendarOverviewCtrl() {
-        if (INSTANCE == null) {
-            INSTANCE = this;
-        }
+        INSTANCE = this;
     }
 
     public void setCalendarItems() {
+        calendarPane.getChildren().clear();
         CalendarServerUtils calendarServerUtils = new CalendarServerUtils();
         int[] date = DateConversion.getDateArray(currentDate);
         List<CalendarItem> calendarItems = calendarServerUtils.getCalendarForWeek(date[0], date[1], date[2]);
         for (CalendarItem calendarItem : calendarItems) {
-            calendarPane.getChildren().add(new CalendarItemView(calendarItem));
+            if (calendarItem != null) {
+                calendarPane.getChildren().add(new CalendarItemView(calendarItem));
+            }
+
         }
     }
 
-    public void initialise(GregorianCalendar calendar, Stage stage) {
+    public void initialise(GregorianCalendar calendar, Stage stage, MainUICtrl mainUICtrl) {
+        this.mainUICtrl = mainUICtrl;
         currentDate = calendar;
         setWeek(calendar);
         setCalendarItems();
@@ -94,11 +100,15 @@ public class CalendarOverviewCtrl {
     }
 
     public void nextWeek() {
-
+        currentDate.add(Calendar.DAY_OF_MONTH, 7);
+        setWeek(currentDate);
+        setCalendarItems();
     }
 
     public void prevWeek() {
-
+        currentDate.add(Calendar.DAY_OF_MONTH, -7);
+        setWeek(currentDate);
+        setCalendarItems();
     }
 
     public void close() {
@@ -106,7 +116,7 @@ public class CalendarOverviewCtrl {
         stage.close();
     }
 
-    public void addButton() {
-
+    public void addButton() throws IOException {
+        mainUICtrl.showAddCalendar();
     }
 }

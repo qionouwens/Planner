@@ -19,7 +19,7 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         CalendarOverviewCtrl calendarOverviewCtrl = CalendarOverviewCtrl.getInstance();
         LocalDateTime now = LocalDateTime.now();
-        calendarOverviewCtrl.initialise(DateConversion.getDate(now.getYear(), now.getMonthValue(), now.getDayOfMonth()), stage);
+        calendarOverviewCtrl.initialise(DateConversion.getDate(now.getYear(), now.getMonthValue(), now.getDayOfMonth()), stage, new MainUICtrl(stage));
         stage.show();
     }
 

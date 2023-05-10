@@ -2,6 +2,7 @@ package planner.commons.helper;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Scanner;
 import java.util.TimeZone;
 
 public class DateConversion {
@@ -17,6 +18,15 @@ public class DateConversion {
         int month = calendar.get(Calendar.MONTH) + 1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         return new int[]{year, month, day};
+    }
+
+    public static GregorianCalendar getDateFromString(String dateString) {
+        Scanner scanner = new Scanner(dateString);
+        scanner.useDelimiter("/");
+        int day = scanner.nextInt();
+        int month = scanner.nextInt();
+        int year = scanner.nextInt();
+        return getDate(year, month, day);
     }
 
     public static GregorianCalendar getFirstDay(GregorianCalendar calendar) {
