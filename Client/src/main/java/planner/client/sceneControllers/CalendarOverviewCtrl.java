@@ -1,8 +1,11 @@
 package planner.client.sceneControllers;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import planner.client.MainUICtrl;
 import planner.client.serverUtils.CalendarServerUtils;
@@ -40,6 +43,8 @@ public class CalendarOverviewCtrl {
     private Label sunday;
     @FXML
     private AnchorPane calendarPane;
+    @FXML
+    private GridPane gridPane;
 
     private GregorianCalendar currentDate;
     private Stage stage;
@@ -67,6 +72,7 @@ public class CalendarOverviewCtrl {
         currentDate = calendar;
         setWeek(calendar);
         setCalendarItems();
+        setAllTimes();
         this.stage = stage;
     }
 
@@ -93,6 +99,18 @@ public class CalendarOverviewCtrl {
         saturday.setText(turnIntoString(startOfWeek));
         startOfWeek.add(Calendar.DAY_OF_MONTH, 1);
         sunday.setText(turnIntoString(startOfWeek));
+    }
+
+    public void setAllTimes() {
+        for (int i = 0; i < 7; i++){
+            for (int j = 0; j < 24; j++) {
+                Label newLabel = new Label();
+                newLabel.setPrefSize(206, 37);
+                newLabel.setText(" " + j + ":00");
+                newLabel.setAlignment(Pos.TOP_LEFT);
+                gridPane.add(newLabel, i, j+1);
+            }
+        }
     }
 
     private String turnIntoString(GregorianCalendar c) {
