@@ -11,22 +11,22 @@ public class CalendarOverview {
         return day*206;
     }
 
-    public static int getY(String startTime) {
+    public static double getY(String startTime) {
         int minutes = getMinutes(startTime);
-        return map(0, 60*24, 124, 1024, minutes);
+        return map(0, 60*24, 0, 888, minutes);
     }
 
-    public static int height(String endTime, String startTime) {
+    public static double height(String endTime, String startTime) {
         int minutes = getMinutes(endTime) - getMinutes(startTime);
-        return map(0, 60*24, 124, 1024, minutes);
+        return map(0, 60*24, 0, 888, minutes);
     }
 
-    public static int map(int xfirst, int xlast, int yfirst, int ylast, int xvalue) {
+    public static double map(int xfirst, int xlast, int yfirst, int ylast, int xvalue) {
         int xdiff = xlast - xfirst;
         int ydiff = ylast - yfirst;
 
         double percentage = (xvalue - xfirst) / ((double) xdiff);
-        return (int) (percentage * ydiff);
+        return (percentage * ydiff);
     }
 
     public static int getMinutes(String time) {

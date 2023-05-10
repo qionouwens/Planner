@@ -19,7 +19,7 @@ public class CalendarItemView extends Pane {
     }
 
     public void createView() {
-        int height = CalendarOverview.height(calendarItem.getEndTime(), calendarItem.getStartTime());
+        double height = CalendarOverview.height(calendarItem.getEndTime(), calendarItem.getStartTime());
 
         this.setPrefSize(206, height);
         this.setLayoutY(CalendarOverview.getY(calendarItem.getStartTime()));
