@@ -19,8 +19,6 @@ javafx {
 dependencies {
     implementation project(path:':Commons')
 
-    implementation group: 'jakarta.activation', name: 'jakart.activation-api', version: '2.1.0'
-
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
