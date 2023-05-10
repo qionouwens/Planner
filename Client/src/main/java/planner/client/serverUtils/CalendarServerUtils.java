@@ -63,4 +63,32 @@ public class CalendarServerUtils {
             throw new RuntimeException(e);
         }
     }
+
+    public void updateCalendar(CalendarItem newCalendarItem) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(serverUtils.getServer() + "/api/calendar/"))
+                    .header("Accept", "application/json")
+                    .header("Content-Type", "application/json")
+                    .PUT(HttpRequest.BodyPublishers.ofString(JSONConverter.convertCalendar(newCalendarItem)))
+                    .build();
+            HttpClient client = HttpClient.newHttpClient();
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (URISyntaxException | IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteCalendar(int id) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(serverUtils.getServer() + "/api/calendar/" + id))
+                    .DELETE()
+                    .build();
+            HttpClient client = HttpClient.newHttpClient();
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (URISyntaxException | IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

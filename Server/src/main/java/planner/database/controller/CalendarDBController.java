@@ -1,6 +1,7 @@
 package planner.database.controller;
 
 import planner.commons.CalendarItem;
+import planner.commons.helper.DateConversion;
 import planner.database.Connect;
 
 import java.sql.PreparedStatement;
@@ -127,6 +128,58 @@ public class CalendarDBController {
             System.out.println(e.getMessage());
         }
         return calendarItems;
+    }
+
+    public void update(CalendarItem newCalendar) {
+        CalendarItem calendarItem;
+        String sql = "UPDATE calendarItem " +
+                " SET title = ?, " +
+                "     date_id = ?, " +
+                "     starttime_hour = ?, " +
+                "     starttime_minute = ?, " +
+                "     endtime_hour = ?, " +
+                "     endtime_minute = ?, " +
+                "     color = ? " +
+                " WHERE calendar_id = ? ";
+        try {
+            PreparedStatement stmt = connect.getConnection().prepareStatement(sql);
+            stmt.setString(1, newCalendar.getTitle());
+            int[] dates = DateConversion.getDateArray(newCalendar.getDate());
+            int year = dates[0];
+            int month = dates[1];
+            int day = dates[2];
+            ResultSet dateResult = dateDBController.getResultSetDate(year, month, day);
+            if (dateResult.getInt(1) == 0) {
+                dateDBController.add(year, month, day);
+                dateResult = dateDBController.getResultSetDate(year, month, day);
+            }
+            stmt.setInt(2, dateResult.getInt("date_id"));
+            Scanner startTime = new Scanner(newCalendar.getStartTime());
+            startTime.useDelimiter(":");
+            stmt.setInt(3, startTime.nextInt());
+            stmt.setInt(4, startTime.nextInt());
+            Scanner endTime = new Scanner(newCalendar.getEndTime());
+            endTime.useDelimiter(":");
+            stmt.setInt(5, endTime.nextInt());
+            stmt.setInt(6, endTime.nextInt());
+            stmt.setString(7, newCalendar.getColour());
+            stmt.setInt(8, newCalendar.getId());
+            stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteCalendar(int id) {
+        String sql = "DELETE FROM calendarItem " +
+                "     WHERE calendar_id = ? ";
+        try {
+            PreparedStatement stmt = connect.getConnection().prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private CalendarItem getFromResultSet(ResultSet result) {

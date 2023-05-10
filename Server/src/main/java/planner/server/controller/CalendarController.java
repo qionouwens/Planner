@@ -29,4 +29,14 @@ public class CalendarController {
     public ResponseEntity<CalendarItem> addCalendar(@RequestBody CalendarItem calendarItem) {
         return ResponseEntity.ok(calendarService.addCalendar(calendarItem));
     }
+
+    @PutMapping(path = {"", "/"})
+    public ResponseEntity<CalendarItem> updateCalendar(@RequestBody CalendarItem calendarItem) {
+        return ResponseEntity.ok(calendarService.updateCalendar(calendarItem));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteCalendar(@PathVariable("id") int id) {
+        return ResponseEntity.ok(calendarService.deleteCalendar(id));
+    }
 }

@@ -36,4 +36,14 @@ public class CalendarService {
         calendarItem.setId(cal_id);
         return calendarItem;
     }
+
+    public CalendarItem updateCalendar(CalendarItem newCalendarItem) {
+        calendarDBController.update(newCalendarItem);
+        return newCalendarItem;
+    }
+
+    public boolean deleteCalendar(int id) {
+        calendarDBController.deleteCalendar(id);
+        return true;
+    }
 }
