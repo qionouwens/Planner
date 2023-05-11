@@ -6,15 +6,17 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
+import planner.client.MainUICtrl;
 import planner.client.helper.CalendarOverview;
 import planner.commons.CalendarItem;
 
 public class CalendarItemView extends Pane {
-    private Label title;
-    private CalendarItem calendarItem;
-    public CalendarItemView(CalendarItem calendarItem) {
+    private final CalendarItem calendarItem;
+    private final MainUICtrl mainUICtrl;
+    public CalendarItemView(CalendarItem calendarItem, MainUICtrl mainUICtrl) {
         super();
         this.calendarItem = calendarItem;
+        this.mainUICtrl = mainUICtrl;
         createView();
     }
 
@@ -26,7 +28,9 @@ public class CalendarItemView extends Pane {
         this.setLayoutX(CalendarOverview.getX(calendarItem.getDate()));
         this.setStyle("-fx-background-color: " + calendarItem.getColour());
 
-        title = new Label();
+        this.setOnMouseClicked(event -> mainUICtrl.showCalendar(calendarItem));
+
+        Label title = new Label();
         title.setText(calendarItem.getTitle());
         title.setPrefSize(206, height);
         title.setTextAlignment(TextAlignment.CENTER);

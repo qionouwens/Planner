@@ -55,6 +55,7 @@ public class AddCalendarCtrl {
     }
 
     public void close() throws IOException {
+        stage.close();
         mainUICtrl.showCalendarOverview();
     }
 }

@@ -2,10 +2,10 @@ package planner.client.sceneControllers;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import planner.client.MainUICtrl;
 import planner.client.serverUtils.CalendarServerUtils;
@@ -61,10 +61,37 @@ public class CalendarOverviewCtrl {
         List<CalendarItem> calendarItems = calendarServerUtils.getCalendarForWeek(date[0], date[1], date[2]);
         for (CalendarItem calendarItem : calendarItems) {
             if (calendarItem != null) {
-                calendarPane.getChildren().add(new CalendarItemView(calendarItem));
+                calendarPane.getChildren().add(new CalendarItemView(calendarItem, mainUICtrl));
             }
-
         }
+        addButtons();
+    }
+
+    public void addButtons() {
+        Button prevButton = new Button("<");
+        prevButton.setPrefSize(40, 40);
+        prevButton.setLayoutX(20);
+        prevButton.setLayoutY(430);
+        prevButton.setOnAction(event -> prevWeek());
+        calendarPane.getChildren().add(prevButton);
+        Button nextButton = new Button(">");
+        nextButton.setPrefSize(40, 40);
+        nextButton.setLayoutX(1380);
+        nextButton.setLayoutY(430);
+        nextButton.setOnAction(event -> nextWeek());
+        calendarPane.getChildren().add(nextButton);
+        Button closeButton = new Button("x");
+        closeButton.setPrefSize(40, 40);
+        closeButton.setLayoutX(1370);
+        closeButton.setLayoutY(50);
+        closeButton.setOnAction(event -> close());
+        calendarPane.getChildren().add(closeButton);
+        Button addButton = new Button("+");
+        addButton.setPrefSize(40, 40);
+        addButton.setLayoutX(1370);
+        addButton.setLayoutY(830);
+        addButton.setOnAction(event -> addButton());
+        calendarPane.getChildren().add(addButton);
     }
 
     public void initialise(GregorianCalendar calendar, Stage stage, MainUICtrl mainUICtrl) {
@@ -134,7 +161,11 @@ public class CalendarOverviewCtrl {
         stage.close();
     }
 
-    public void addButton() throws IOException {
-        mainUICtrl.showAddCalendar();
+    public void addButton() {
+        try {
+            mainUICtrl.showAddCalendar();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
