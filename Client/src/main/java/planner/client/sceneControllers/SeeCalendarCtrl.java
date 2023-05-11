@@ -11,7 +11,6 @@ import planner.client.serverUtils.CalendarServerUtils;
 import planner.commons.CalendarItem;
 import planner.commons.helper.DateConversion;
 
-import java.io.IOException;
 import java.util.GregorianCalendar;
 
 public class SeeCalendarCtrl {
@@ -73,11 +72,7 @@ public class SeeCalendarCtrl {
 
     public void close() {
         stage.close();
-        try {
-            mainUICtrl.showCalendarOverview();
-        } catch (IOException e) {
-            System.out.println("Failed");
-        }
+        mainUICtrl.showCalendarOverview();
     }
 
     public void save() {

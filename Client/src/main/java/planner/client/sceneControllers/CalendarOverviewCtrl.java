@@ -6,14 +6,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 import planner.client.MainUICtrl;
 import planner.client.serverUtils.CalendarServerUtils;
 import planner.client.views.CalendarItemView;
 import planner.commons.CalendarItem;
 import planner.commons.helper.DateConversion;
 
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -47,7 +45,6 @@ public class CalendarOverviewCtrl {
     private GridPane gridPane;
 
     private GregorianCalendar currentDate;
-    private Stage stage;
     private MainUICtrl mainUICtrl;
 
     public CalendarOverviewCtrl() {
@@ -94,13 +91,12 @@ public class CalendarOverviewCtrl {
         calendarPane.getChildren().add(addButton);
     }
 
-    public void initialise(GregorianCalendar calendar, Stage stage, MainUICtrl mainUICtrl) {
+    public void initialise(GregorianCalendar calendar, MainUICtrl mainUICtrl) {
         this.mainUICtrl = mainUICtrl;
         currentDate = calendar;
         setWeek(calendar);
         setCalendarItems();
         setAllTimes();
-        this.stage = stage;
     }
 
     public static CalendarOverviewCtrl getInstance() {
@@ -157,15 +153,10 @@ public class CalendarOverviewCtrl {
     }
 
     public void close() {
-        System.out.println("Hello");
-        stage.close();
+        mainUICtrl.showHome();
     }
 
     public void addButton() {
-        try {
-            mainUICtrl.showAddCalendar();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        mainUICtrl.showAddCalendar();
     }
 }
