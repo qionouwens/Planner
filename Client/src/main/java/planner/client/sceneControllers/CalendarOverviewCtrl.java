@@ -58,7 +58,7 @@ public class CalendarOverviewCtrl {
         List<CalendarItem> calendarItems = calendarServerUtils.getCalendarForWeek(date[0], date[1], date[2]);
         for (CalendarItem calendarItem : calendarItems) {
             if (calendarItem != null) {
-                calendarPane.getChildren().add(new CalendarItemView(calendarItem, mainUICtrl));
+                calendarPane.getChildren().add(new CalendarItemView(calendarItem, mainUICtrl, false));
             }
         }
         addButtons();
