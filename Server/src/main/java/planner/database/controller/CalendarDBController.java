@@ -30,6 +30,23 @@ public class CalendarDBController {
         return null;
     }
 
+    public List<CalendarItem> getByDay(int year, int month, int day) {
+        String sql = "SELECT calendar_id, title, c.date_id, starttime_hour, starttime_minute, endtime_hour, endtime_minute, color " +
+                " FROM calendarItem c " +
+                " JOIN dateTable d ON c.date_id = d.date_id " +
+                " WHERE year = ? AND month = ? AND day = ? ";
+        try {
+            PreparedStatement stmt = connect.getConnection().prepareStatement(sql);
+            stmt.setInt(1, year);
+            stmt.setInt(2, month);
+            stmt.setInt(3, day);
+            ResultSet result = stmt.executeQuery();
+            return getListFromResultSet(result);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void add(String title, int year, int month, int day,
                     String startTime, String endTime, String colour) {
         String sql = "INSERT INTO calendarItem (title, date_id, starttime_hour, starttime_minute, endtime_hour, endtime_minute, color) " +
@@ -188,8 +205,12 @@ public class CalendarDBController {
                 return null;
             }
             GregorianCalendar calendar = dateDBController.getById(result.getInt("date_id"));
-            String startTime = result.getInt("starttime_hour") + ":" + result.getInt("starttime_minute");
-            String endTime = result.getInt("endtime_hour") + ":" + result.getInt("endtime_minute");
+            int startTimeMinute = result.getInt("starttime_minute");
+            String startString = startTimeMinute < 10 ? startTimeMinute + "0" : String.valueOf(startTimeMinute);
+            String startTime = result.getInt("starttime_hour") + ":" + startString;
+            int endTimeMinute = result.getInt("starttime_minute");
+            String endString = endTimeMinute < 10 ? endTimeMinute + "0" : String.valueOf(endTimeMinute);
+            String endTime = result.getInt("endtime_hour") + ":" + endString;
             return new CalendarItem(result.getInt("calendar_id"), result.getString("title"),
                     calendar, startTime, endTime, result.getString("color"), null);
         } catch (SQLException e) {

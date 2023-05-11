@@ -4,20 +4,30 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import planner.client.MainUICtrl;
 import planner.client.serverUtils.CalendarServerUtils;
 import planner.client.views.CalendarItemView;
+import planner.client.views.DailyScheduleView;
 import planner.commons.CalendarItem;
 import planner.commons.helper.DateConversion;
 
 import java.time.LocalDateTime;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.List;
 
 public class HomeScreenCtrl {
+    private class CalendarItemComparator implements Comparator<CalendarItem> {
+        @Override
+        public int compare(CalendarItem o1, CalendarItem o2) {
+            return o1.compareTo(o2);
+        }
+    }
+    
     @FXML
     private Label monday;
     @FXML
@@ -36,6 +46,8 @@ public class HomeScreenCtrl {
     private GridPane gridPane;
     @FXML
     private AnchorPane calendarPane;
+    @FXML
+    private ScrollPane daily;
     private static HomeScreenCtrl INSTANCE;
     private MainUICtrl mainUICtrl;
     private GregorianCalendar today;
@@ -53,6 +65,7 @@ public class HomeScreenCtrl {
         setWeek();
         setHours();
         setCalendarItems();
+        setDailySchedule();
     }
 
     public static HomeScreenCtrl getINSTANCE() {
@@ -106,6 +119,15 @@ public class HomeScreenCtrl {
             }
         }
         addButtons();
+    }
+
+    public void setDailySchedule() {
+        CalendarServerUtils calendarServerUtils = new CalendarServerUtils();
+        int[] dates = DateConversion.getDateArray(today);
+        List<CalendarItem> calendarItems = calendarServerUtils.getCalendarForDay(dates[0], dates[1], dates[2]);
+        calendarItems.sort(new CalendarItemComparator());
+        DailyScheduleView dailyScheduleView = new DailyScheduleView(calendarItems, mainUICtrl);
+        daily.setContent(dailyScheduleView);
     }
 
     public void addButtons() {

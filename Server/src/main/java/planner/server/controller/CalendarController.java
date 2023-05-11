@@ -13,11 +13,17 @@ import java.util.*;
 public class CalendarController {
     private final CalendarService calendarService = new CalendarService();
 
-    @GetMapping("/{year}/{month}/{day}")
+    @GetMapping("/week/{year}/{month}/{day}")
     public ResponseEntity<List<CalendarItem>> getCalendarForWeek(@PathVariable("year") int year, @PathVariable("month") int month,
                                                            @PathVariable("day") int day) {
         GregorianCalendar calendar = DateConversion.getDate(year, month, day);
         return ResponseEntity.ok(calendarService.getByWeek(calendar));
+    }
+
+    @GetMapping("/{year}/{month}/{day}")
+    public ResponseEntity<List<CalendarItem>> getCalendarForDay(@PathVariable("year") int year, @PathVariable("month") int month,
+                                                                 @PathVariable("day") int day) {
+        return ResponseEntity.ok(calendarService.getByDay(year, month, day));
     }
 
     @GetMapping("/{id}")

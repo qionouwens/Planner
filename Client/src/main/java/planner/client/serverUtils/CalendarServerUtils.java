@@ -53,6 +53,20 @@ public class CalendarServerUtils {
     public List<CalendarItem> getCalendarForWeek(int year, int month, int day) {
         try {
             HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(serverUtils.getServer() + "/api/calendar/week/" + year + "/" + month + "/" + day))
+                    .GET()
+                    .build();
+            HttpClient client = HttpClient.newHttpClient();
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return ClassParser.parseCalendarList(response.body());
+        } catch (URISyntaxException | IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<CalendarItem> getCalendarForDay(int year, int month, int day) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI(serverUtils.getServer() + "/api/calendar/" + year + "/" + month + "/" + day))
                     .GET()
                     .build();

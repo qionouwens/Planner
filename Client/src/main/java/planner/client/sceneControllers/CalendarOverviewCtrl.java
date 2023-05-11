@@ -82,6 +82,7 @@ public class CalendarOverviewCtrl {
         closeButton.setLayoutX(1370);
         closeButton.setLayoutY(50);
         closeButton.setOnAction(event -> close());
+        closeButton.setCancelButton(true);
         calendarPane.getChildren().add(closeButton);
         Button addButton = new Button("+");
         addButton.setPrefSize(40, 40);

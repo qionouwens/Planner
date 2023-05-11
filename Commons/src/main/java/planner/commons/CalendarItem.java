@@ -2,7 +2,7 @@ package planner.commons;
 
 import java.util.*;
 
-public class CalendarItem {
+public class CalendarItem implements Comparable<CalendarItem> {
     private int id;
     private String title;
     private GregorianCalendar date;
@@ -113,5 +113,19 @@ public class CalendarItem {
                 ", colour='" + colour + '\'' +
                 ", todoList=" + todoList +
                 '}';
+    }
+    @Override
+    public int compareTo(CalendarItem o) {
+        Scanner scanner = new Scanner(startTime);
+        scanner.useDelimiter(":");
+        int hours = scanner.nextInt();
+        int minutes = scanner.nextInt();
+        int thisMinutes = 60*hours + minutes;
+        scanner = new Scanner(o.getStartTime());
+        scanner.useDelimiter(":");
+        hours = scanner.nextInt();
+        minutes = scanner.nextInt();
+        int otherMinutes = 60*hours + minutes;
+        return Integer.compare(thisMinutes, otherMinutes);
     }
 }

@@ -12,7 +12,7 @@
    <children>
       <AnchorPane prefHeight="512.0" prefWidth="360.0" style="-fx-border-color: black;">
          <children>
-            <ScrollPane prefHeight="512.0" prefWidth="360.0">
+            <ScrollPane fx:id="daily" hbarPolicy="NEVER" prefHeight="512.0" prefWidth="360.0">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
               </content>

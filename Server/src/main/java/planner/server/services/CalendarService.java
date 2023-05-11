@@ -28,6 +28,10 @@ public class CalendarService {
         return calendarDBController.getById(id);
     }
 
+    public List<CalendarItem> getByDay(int year, int month, int day) {
+        return calendarDBController.getByDay(year, month, day);
+    }
+
     public CalendarItem addCalendar(CalendarItem calendarItem) {
         int[] date = DateConversion.getDateArray(calendarItem.getDate());
         calendarDBController.add(calendarItem.getTitle(), date[0], date[1], date[2], calendarItem.getStartTime(),
