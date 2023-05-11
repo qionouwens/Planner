@@ -16,7 +16,7 @@ public class HelloApplication extends Application {
         stage.setTitle("Hello!");
         stage.setScene(scene);
         HomeScreenCtrl homeScreenCtrl = HomeScreenCtrl.getINSTANCE();
-        homeScreenCtrl.initialise(stage, new MainUICtrl(stage));
+        homeScreenCtrl.initialise(new MainUICtrl(stage));
         stage.show();
     }
 

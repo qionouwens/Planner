@@ -46,7 +46,7 @@ public class MainUICtrl {
         String home = "HomeScreen.fxml";
         showStage(home, 1440, 1024);
         HomeScreenCtrl homeScreenCtrl = HomeScreenCtrl.getINSTANCE();
-        homeScreenCtrl.initialise(stage, this);
+        homeScreenCtrl.initialise(this);
     }
 
     public void showStage(String fxmlScene, int width, int height) {
