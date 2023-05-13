@@ -22,6 +22,7 @@ public class DailyScheduleView extends AnchorPane {
         this.setPrefSize(358, 70*calendarItems.size());
         for (int i = 0; i < calendarItems.size(); i++) {
             CalendarItem calendarItem = calendarItems.get(i);
+            if (calendarItem == null) {return;}
             AnchorPane newPane = new AnchorPane();
             newPane.setPrefSize(358, 70);
             newPane.setLayoutX(0);
