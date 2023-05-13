@@ -96,7 +96,7 @@ public class CreateDatabase {
         String sql = "CREATE TABLE IF NOT EXISTS expenseCategory ( " +
                 "category_id INTEGER PRIMARY KEY, " +
                 "name TEXT, " +
-                "budget TEXT " +
+                "budget INTEGER " +
                 ");";
 
         try {

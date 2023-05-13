@@ -14,6 +14,16 @@ public class DateDBController {
     public DateDBController() {
         connection = new Connect();
     }
+
+    public int getId(int year, int month, int day) throws SQLException {
+        ResultSet result = getResultSetDate(year, month, day);
+        if (result.getInt("date_id") == 0) {
+            add(year, month, day);
+            result = getResultSetDate(year, month, day);
+        }
+        return result.getInt("date_id");
+    }
+
     public void add(int year, int month, int day) {
         String sql = "INSERT INTO dateTable (day, month, year) " +
                 "VALUES (?, ?, ?)";
