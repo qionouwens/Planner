@@ -54,7 +54,7 @@ public class BudgetService {
         budgetDBController.addCategory(statementCategory);
     }
 
-    public void deleteStatement(Statement statement) {
-        budgetDBController.deleteStatement(statement);
+    public void deleteStatement(int id) {
+        budgetDBController.deleteStatement(id);
     }
 }

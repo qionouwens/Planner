@@ -157,12 +157,12 @@ public class BudgetDBController {
         }
     }
 
-    public void deleteStatement(Statement statement) {
+    public void deleteStatement(int id) {
         String sql = "DELETE FROM incomeExpense WHERE id = ? ";
         try {
             PreparedStatement stmt;
             stmt = connect.getConnection().prepareStatement(sql);
-            stmt.setInt(1, statement.getId());
+            stmt.setInt(1, id);
             stmt.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);

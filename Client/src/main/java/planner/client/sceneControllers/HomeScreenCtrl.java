@@ -1,17 +1,21 @@
 package planner.client.sceneControllers;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import planner.client.MainUICtrl;
+import planner.client.serverUtils.BudgetServerUtils;
 import planner.client.serverUtils.CalendarServerUtils;
 import planner.client.views.CalendarItemView;
 import planner.client.views.DailyScheduleView;
 import planner.commons.CalendarItem;
+import planner.commons.ResultCategory;
 import planner.commons.helper.DateConversion;
 
 import java.time.LocalDateTime;
@@ -27,7 +31,9 @@ public class HomeScreenCtrl {
             return o1.compareTo(o2);
         }
     }
-    
+
+    private ObservableList<ResultCategory> categories;
+
     @FXML
     private Label monday;
     @FXML
@@ -48,6 +54,16 @@ public class HomeScreenCtrl {
     private AnchorPane calendarPane;
     @FXML
     private ScrollPane daily;
+    @FXML
+    private TableView<ResultCategory> table;
+    @FXML
+    private TableColumn<ResultCategory, String> category;
+    @FXML
+    private TableColumn<ResultCategory, Integer> budget;
+    @FXML
+    private TableColumn<ResultCategory, Integer> spend;
+    @FXML
+    private TableColumn<ResultCategory, Integer> left;
     private static HomeScreenCtrl INSTANCE;
     private MainUICtrl mainUICtrl;
     private GregorianCalendar today;
@@ -62,6 +78,8 @@ public class HomeScreenCtrl {
         LocalDateTime now = LocalDateTime.now();
         today = DateConversion.getDate(now.getYear(), now.getMonthValue(), now.getDayOfMonth());
         currentDate = DateConversion.getDate(now.getYear(), now.getMonthValue(), now.getDayOfMonth());
+        initialiseTable();
+        setTable();
         setWeek();
         setHours();
         setCalendarItems();
@@ -149,6 +167,22 @@ public class HomeScreenCtrl {
         addButton.setLayoutY(400);
         addButton.setOnAction(event -> addButton());
         calendarPane.getChildren().add(addButton);
+    }
+
+    public void initialiseTable() {
+        category.setCellValueFactory(stat -> new SimpleStringProperty(stat.getValue().getName()));
+        budget.setCellValueFactory(stat -> new SimpleIntegerProperty(stat.getValue().getBudget()).asObject());
+        spend.setCellValueFactory(stat -> new SimpleIntegerProperty(stat.getValue().getAmount()).asObject());
+        left.setCellValueFactory(stat -> new SimpleIntegerProperty(
+                stat.getValue().getBudget()-stat.getValue().getAmount()).asObject());
+    }
+
+    public void setTable() {
+        BudgetServerUtils budgetServerUtils = new BudgetServerUtils();
+        LocalDateTime now = LocalDateTime.now();
+        List<ResultCategory> results = budgetServerUtils.getResultForThisMonth(now.getYear(), now.getMonthValue());
+        categories = FXCollections.observableList(results);
+        table.setItems(categories);
     }
 
     public void prevWeek() {

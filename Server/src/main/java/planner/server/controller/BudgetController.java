@@ -55,8 +55,8 @@ public class BudgetController {
         budgetService.updateBudget(category);
     }
 
-    @DeleteMapping("")
-    public void deleteStatment(@RequestBody Statement statement) {
-        budgetService.deleteStatement(statement);
+    @DeleteMapping("/{id}")
+    public void deleteStatement(@PathVariable("id") int id) {
+        budgetService.deleteStatement(id);
     }
 }

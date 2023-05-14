@@ -134,6 +134,7 @@ public class ClassParser {
         Scanner scanner = new Scanner(booleanString);
         scanner.useDelimiter(":");
         scanner.next();
-        return scanner.nextBoolean();
+        String result = scanner.next();
+        return result.equals("true");
     }
 }

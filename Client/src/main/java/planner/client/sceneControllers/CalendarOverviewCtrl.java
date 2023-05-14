@@ -44,6 +44,7 @@ public class CalendarOverviewCtrl {
     @FXML
     private GridPane gridPane;
 
+
     private GregorianCalendar currentDate;
     private MainUICtrl mainUICtrl;
 
