@@ -1,6 +1,8 @@
 package planner.commons.helper;
 
 import planner.commons.CalendarItem;
+import planner.commons.Statement;
+import planner.commons.StatementCategory;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -14,6 +16,23 @@ public class JSONConverter {
                 ",\"endTime\":\"" + calendarItem.getEndTime() + "\"" +
                 ",\"colour\":\"" + calendarItem.getColour() + "\"" +
                 ",\"todoList\":null}";
+        return result;
+    }
+
+    public static String convertStatement(Statement statement) {
+        String isIncome = statement.isIncome() ? "true" : "false";
+        String result = "{\"id\":" + statement.getId() + "," +
+                "\"amount\":" + statement.getAmount() + "," +
+                "\"category\":\"" + statement.getCategory() + "\"," +
+                "\"date\":\"" + convertDate(statement.getDate()) + "\"," +
+                "\"income\":" + isIncome + "}";
+        return result;
+    }
+
+    public static String convertStatementCategory(StatementCategory statementCategory) {
+        String result = "{\"id\":" + statementCategory.getId() +
+                ",\"name\":\"" + statementCategory.getName() + "\"" +
+                ",\"budget\":" + statementCategory.getBudget() + "}";
         return result;
     }
 
