@@ -121,13 +121,18 @@ public class BudgetDBController {
     }
 
     public void updateCategory(StatementCategory category) {
-        String sql = "INSERT INTO expenseCategory (name, budget) " +
-                "   VALUES (?, ?) ";
+        String sql = "UPDATE expenseCategory " +
+                "SET name = ?, " +
+                "    budget = ?" +
+                "WHERE " +
+                "    category_id = ? " +
+                "   ";
         try {
             PreparedStatement stmt;
             stmt = connect.getConnection().prepareStatement(sql);
             stmt.setString(1, category.getName());
             stmt.setInt(2, category.getBudget());
+            stmt.setInt(3, category.getId());
             stmt.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -177,6 +182,19 @@ public class BudgetDBController {
             stmt.setString(1, name);
             ResultSet result = stmt.executeQuery();
             return result.getInt("category_id");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public StatementCategory getCategoryByName(String name) {
+        String sql = "SELECT * FROM expenseCategory WHERE name = ? ";
+        try {
+            PreparedStatement stmt;
+            stmt = connect.getConnection().prepareStatement(sql);
+            stmt.setString(1, name);
+            ResultSet result = stmt.executeQuery();
+            return getCategory(result);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

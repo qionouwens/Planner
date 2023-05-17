@@ -16,8 +16,12 @@ import java.util.List;
 public class RunServerCommands {
     public static void main(String[] args){
         BudgetDBController budgetDBController = new BudgetDBController();
-        List<StatementCategory> categories = budgetDBController.getCategories();
-        List<ResultCategory> categories1 = budgetDBController.getResultCategory(2023, 4);
+        StatementCategory stmt = new StatementCategory(0, "Fun", 500);
+        budgetDBController.addCategory(stmt);
+        stmt = new StatementCategory(0, "Clothing", 500);
+        budgetDBController.addCategory(stmt);
+        stmt = new StatementCategory(0, "Groceries", 500);
+        budgetDBController.addCategory(stmt);
 
         System.out.println("h");
     }

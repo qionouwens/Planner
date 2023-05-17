@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import planner.commons.ResultCategory;
 import planner.commons.Statement;
 import planner.commons.StatementCategory;
+import planner.commons.helper.ClassParser;
 import planner.server.services.BudgetService;
 
 import java.util.List;
@@ -51,8 +52,9 @@ public class BudgetController {
     }
 
     @PutMapping("/category")
-    public void updateCategory(@RequestBody StatementCategory category) {
-        budgetService.updateBudget(category);
+    public ResponseEntity<StatementCategory> updateCategory(@RequestBody String category) {
+        StatementCategory statementCategory = ClassParser.getCategory(category);
+        return ResponseEntity.ok(budgetService.updateBudget(statementCategory));
     }
 
     @DeleteMapping("/{id}")

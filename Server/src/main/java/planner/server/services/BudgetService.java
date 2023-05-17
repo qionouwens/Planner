@@ -38,8 +38,9 @@ public class BudgetService {
         return resultCategories;
     }
 
-    public void updateBudget(StatementCategory statementCategory) {
+    public StatementCategory updateBudget(StatementCategory statementCategory) {
         budgetDBController.updateCategory(statementCategory);
+        return budgetDBController.getCategoryByName(statementCategory.getName());
     }
 
     public void updateStatement(Statement statement) {

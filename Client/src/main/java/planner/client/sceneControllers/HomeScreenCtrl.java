@@ -200,4 +200,8 @@ public class HomeScreenCtrl {
     public void addButton() {
         mainUICtrl.showAddCalendar();
     }
+
+    public void changeBudget() {
+        mainUICtrl.showBudget();
+    }
 }

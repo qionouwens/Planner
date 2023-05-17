@@ -30,10 +30,9 @@ public class JSONConverter {
     }
 
     public static String convertStatementCategory(StatementCategory statementCategory) {
-        String result = "{\"id\":" + statementCategory.getId() +
+        return "{\"id\":" + statementCategory.getId() +
                 ",\"name\":\"" + statementCategory.getName() + "\"" +
                 ",\"budget\":" + statementCategory.getBudget() + "}";
-        return result;
     }
 
     static String convertDate(GregorianCalendar calendar) {

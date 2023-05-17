@@ -154,7 +154,7 @@
          <children>
             <Button layoutX="14.0" layoutY="402.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="334.0" text="Jaaroverzicht" />
             <Button layoutX="14.0" layoutY="437.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="334.0" text="Zie Uitgaven/Inkomsten" />
-            <Button layoutX="14.0" layoutY="473.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="334.0" text="Verander Budget" />
+            <Button layoutX="14.0" layoutY="473.0" mnemonicParsing="false" onAction="#changeBudget" prefHeight="25.0" prefWidth="334.0" text="Verander Budget" />
             <ScrollPane hbarPolicy="NEVER" prefHeight="392.0" prefWidth="360.0">
                <content>
                   <TableView fx:id="table" prefHeight="389.0" prefWidth="358.0">

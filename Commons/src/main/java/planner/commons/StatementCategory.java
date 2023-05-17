@@ -53,7 +53,8 @@ public class StatementCategory {
     @Override
     public String toString() {
         return "StatementCategory{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", budget=" + budget +
                 '}';
     }

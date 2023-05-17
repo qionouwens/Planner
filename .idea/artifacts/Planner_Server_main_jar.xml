@@ -1,0 +1,42 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Planner.Server.main:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Planner_Server_main_jar</output-path>
+    <root id="archive" name="Planner.Server.main.jar">
+      <element id="module-output" name="Planner.Server.main" />
+      <element id="module-output" name="Planner.Commons.main" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-classic/1.2.12/d4dee19148dccb177a0736eb2027bd195341da78/logback-classic-1.2.12.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/5.3.27/ff5e35f2d4f72d22c476ff9b7bce1de25c980ebd/spring-core-5.3.27.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.xerial/sqlite-jdbc/3.41.2.1/a07a0a80c1c276760df3601a319800037e275fc3/sqlite-jdbc-3.41.2.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.13.5/136f77ab424f302c9e27230b4482e8000e142edf/jackson-annotations-2.13.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.datatype/jackson-datatype-jdk8/2.13.5/1278f38160812811c56eb77f67213662ed1c7a2e/jackson-datatype-jdk8-2.13.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-autoconfigure/2.7.11/d7b1b3a4c494e240ad0a53b2d6661982d7c9ddac/spring-boot-autoconfigure-2.7.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.36/6c62681a2f655b49963a5983b8b0950a6120ae14/slf4j-api-1.7.36.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/5.3.27/46e7d917551ffcc0a104fd971d1fa207b30d7761/spring-beans-5.3.27.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/5.3.27/251162aa2fe5cb374a482ae87fa6e8e8e747d72/spring-context-5.3.27.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jcl/5.3.27/9698ea7d5361b5e3a27ed08beb7770279bd2397/spring-jcl-5.3.27.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-webmvc/5.3.27/8beabbb0cb64c448b39df790b62e342245ee7971/spring-webmvc-5.3.27.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter/2.7.11/3b655d0b1817b5f92301d9da5eb9f8f8f37ded6a/spring-boot-starter-2.7.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-core/9.0.74/5afe5c4cfc8e78c395207d6abcc98666b508ec0c/tomcat-embed-core-9.0.74.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-el/9.0.74/f7b97a38cc7dee092fd58a8df80788284b588566/tomcat-embed-el-9.0.74.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/5.3.27/ecae2962d53c587fd0e405cd60dc8415d1b9e12d/spring-aop-5.3.27.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-web/5.3.27/a51c45a8602052a2a90f7e645a47ba8df1547795/spring-web-5.3.27.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.module/jackson-module-parameter-names/2.13.5/a401a99e7a45450fd3ef76e82ba39005fd1a8c22/jackson-module-parameter-names-2.13.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-web/2.7.11/c23ca827c1d5cf45d70f4b5204a9b889ec5d3b24/spring-boot-starter-web-2.7.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.13.5/d07c97d3de9ea658caf1ff1809fd9de930a286a/jackson-core-2.13.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-api/2.17.2/f42d6afa111b4dec5d2aea0fe2197240749a4ea6/log4j-api-2.17.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot/2.7.11/f99d0b98ecd8de1400dc47d00194202e9be5a16e/spring-boot-2.7.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/5.3.27/6225619970e8376df5c3d777610d9d03b977063b/spring-expression-5.3.27.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.yaml/snakeyaml/1.30/8fde7fe2586328ac3c68db92045e1c8759125000/snakeyaml-1.30.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-tomcat/2.7.11/d9d6f0e0aacd095bcae08bfbb72404ec114238e2/spring-boot-starter-tomcat-2.7.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-logging/2.7.11/b0d3e13291ecd5014d3c5f8818f50620f7b1f1fd/spring-boot-starter-logging-2.7.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/jul-to-slf4j/1.7.36/ed46d81cef9c412a88caef405b58f93a678ff2ca/jul-to-slf4j-1.7.36.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.datatype/jackson-datatype-jsr310/2.13.5/8ba3b868e81d7fc6ead686bd2353859b111d9eaf/jackson-datatype-jsr310-2.13.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-to-slf4j/2.17.2/17dd0fae2747d9a28c67bc9534108823d2376b46/log4j-to-slf4j-2.17.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.13.5/aa95e46dbc32454f3983221d420e78ef19ddf844/jackson-databind-2.13.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-websocket/9.0.74/a38c3bf842eab8112809bbdb836441db423076bf/tomcat-embed-websocket-9.0.74.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-core/1.2.12/1d8e51a698b138065d73baefb4f94531faa323cb/logback-core-1.2.12.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.annotation/jakarta.annotation-api/1.3.5/59eb84ee0d616332ff44aba065f3888cf002cd2d/jakarta.annotation-api-1.3.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-json/2.7.11/9f47d076fd9d1b2acec8d189e6413d3c5d270d30/spring-boot-starter-json-2.7.11.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

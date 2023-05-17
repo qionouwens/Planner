@@ -12,6 +12,9 @@ import java.util.Scanner;
 
 public class ClassParser {
     public static List<CalendarItem> parseCalendarList(String calendarString) {
+        if (calendarString.charAt(0) == '[') {
+            return new ArrayList<>();
+        }
         List<CalendarItem> calendarItems = new ArrayList<>();
         Scanner scanner = new Scanner(calendarString);
         scanner.useDelimiter("},");
@@ -62,10 +65,11 @@ public class ClassParser {
     }
 
     public static StatementCategory getCategory(String category) {
-        Scanner scanner = new Scanner(category);
         if (category.equals("[null]")) {
             return null;
         }
+        category = category.replaceAll("[}\\]]", "");
+        Scanner scanner = new Scanner(category);
         scanner.useDelimiter(",");
         int id = getInteger(scanner.next());
         String name = getString(scanner.next());
@@ -85,7 +89,7 @@ public class ClassParser {
 
     public static ResultCategory getResult(String result) {
         Scanner scanner = new Scanner(result);
-        if (result.equals("[null]")) {
+        if (result.charAt(0) == '[') {
             return null;
         }
         scanner.useDelimiter(",");
@@ -99,6 +103,9 @@ public class ClassParser {
     }
 
     public static List<ResultCategory> getResultList(String resultList) {
+        if (resultList.charAt(0) == '[') {
+            return new ArrayList<>();
+        }
         List<ResultCategory> results = new ArrayList<>();
         Scanner scanner = new Scanner(resultList);
         scanner.useDelimiter("},");

@@ -3,10 +3,7 @@ package planner.client;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import planner.client.sceneControllers.AddCalendarCtrl;
-import planner.client.sceneControllers.CalendarOverviewCtrl;
-import planner.client.sceneControllers.HomeScreenCtrl;
-import planner.client.sceneControllers.SeeCalendarCtrl;
+import planner.client.sceneControllers.*;
 import planner.commons.CalendarItem;
 import planner.commons.helper.DateConversion;
 
@@ -48,6 +45,14 @@ public class MainUICtrl {
         HomeScreenCtrl homeScreenCtrl = HomeScreenCtrl.getINSTANCE();
         homeScreenCtrl.initialise(this);
     }
+
+    public void showBudget() {
+        String budget = "Budget.fxml";
+        showStage(budget, 406, 400);
+        BudgetCtrl budgetCtrl = BudgetCtrl.getInstance();
+        budgetCtrl.Initialise(this);
+    }
+
 
     public void showStage(String fxmlScene, int width, int height) {
         try {
