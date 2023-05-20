@@ -25,7 +25,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class HomeScreenCtrl {
-    private class CalendarItemComparator implements Comparator<CalendarItem> {
+    private static class CalendarItemComparator implements Comparator<CalendarItem> {
         @Override
         public int compare(CalendarItem o1, CalendarItem o2) {
             return o1.compareTo(o2);
@@ -171,10 +171,10 @@ public class HomeScreenCtrl {
 
     public void initialiseTable() {
         category.setCellValueFactory(stat -> new SimpleStringProperty(stat.getValue().getName()));
-        budget.setCellValueFactory(stat -> new SimpleIntegerProperty(stat.getValue().getBudget()).asObject());
-        spend.setCellValueFactory(stat -> new SimpleIntegerProperty(stat.getValue().getAmount()).asObject());
+        budget.setCellValueFactory(stat -> new SimpleIntegerProperty(stat.getValue().getBudget() / 100).asObject());
+        spend.setCellValueFactory(stat -> new SimpleIntegerProperty((stat.getValue().getAmount()) / 100).asObject());
         left.setCellValueFactory(stat -> new SimpleIntegerProperty(
-                stat.getValue().getBudget()-stat.getValue().getAmount()).asObject());
+                (stat.getValue().getBudget() - stat.getValue().getAmount()) / 100).asObject());
     }
 
     public void setTable() {
