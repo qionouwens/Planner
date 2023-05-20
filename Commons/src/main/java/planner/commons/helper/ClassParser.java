@@ -56,6 +56,9 @@ public class ClassParser {
 
     public static List<Statement> getStatementList(String statementList) {
         List<Statement> statements = new ArrayList<>();
+        if (statementList.equals("[]")) {
+            return statements;
+        }
         Scanner scanner = new Scanner(statementList);
         scanner.useDelimiter("},");
         while (scanner.hasNext()) {

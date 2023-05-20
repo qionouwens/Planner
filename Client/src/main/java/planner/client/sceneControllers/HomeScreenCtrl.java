@@ -204,4 +204,8 @@ public class HomeScreenCtrl {
     public void changeBudget() {
         mainUICtrl.showBudget();
     }
+
+    public void seeExpenses() {
+        mainUICtrl.showExpenses();
+    }
 }

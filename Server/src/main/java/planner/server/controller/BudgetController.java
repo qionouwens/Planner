@@ -35,20 +35,20 @@ public class BudgetController {
     }
 
     @PostMapping("/statement")
-    public ResponseEntity<Boolean> addStatement(@RequestBody Statement statement) {
-        budgetService.addStatement(statement);
+    public ResponseEntity<Boolean> addStatement(@RequestBody String statement) {
+        budgetService.addStatement(ClassParser.getStatement(statement));
         return ResponseEntity.ok(true);
     }
 
     @PostMapping("/category")
-    public ResponseEntity<Boolean> addCategory(@RequestBody StatementCategory statementCategory) {
-        budgetService.addCategory(statementCategory);
+    public ResponseEntity<Boolean> addCategory(@RequestBody String statementCategory) {
+        budgetService.addCategory(ClassParser.getCategory(statementCategory));
         return ResponseEntity.ok(true);
     }
 
     @PutMapping("/statement")
-    public void updateStatement(@RequestBody Statement statement) {
-        budgetService.updateStatement(statement);
+    public void updateStatement(@RequestBody String statement) {
+        budgetService.updateStatement(ClassParser.getStatement(statement));
     }
 
     @PutMapping("/category")

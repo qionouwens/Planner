@@ -26,7 +26,7 @@ public class BudgetDBController {
                 "     JOIN expenseCategory c ON c.category_id = e.category_id " +
                 "     ORDER BY " +
                 "             d.year DESC, d.month DESC, d.day DESC" +
-                "     LIMIT 50  ";
+                "     LIMIT 30  ";
         try {
             PreparedStatement stmt;
             stmt = connect.getConnection().prepareStatement(sql);

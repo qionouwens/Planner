@@ -59,6 +59,7 @@ public class BudgetCtrl {
         if (isEdit) {
             StatementCategory statementCategory = new StatementCategory(0, category.getText(), amountAdd);
             budgetServerUtils.addCategory(statementCategory);
+            close();
             return;
         }
         String category = categories.getValue();

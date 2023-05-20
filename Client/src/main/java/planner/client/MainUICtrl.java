@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import planner.client.sceneControllers.*;
 import planner.commons.CalendarItem;
+import planner.commons.Statement;
 import planner.commons.helper.DateConversion;
 
 import java.io.IOException;
@@ -51,6 +52,27 @@ public class MainUICtrl {
         showStage(budget, 406, 400);
         BudgetCtrl budgetCtrl = BudgetCtrl.getInstance();
         budgetCtrl.Initialise(this);
+    }
+
+    public void showExpenses() {
+        String expenses = "SeeExpenses.fxml";
+        showStage(expenses, 720, 1024);
+        SeeExpensesCtrl seeExpensesCtrl = SeeExpensesCtrl.getINSTANCE();
+        seeExpensesCtrl.initialise(this);
+    }
+
+    public void showAddStatement() {
+        String addStatement = "AddStatement.fxml";
+        showStage(addStatement, 400, 363);
+        AddExpenseCtrl addExpenseCtrl = AddExpenseCtrl.getInstance();
+        addExpenseCtrl.initialise(this);
+    }
+
+    public void showEditStatement(Statement statement) {
+        String addStatement = "AddStatement.fxml";
+        showStage(addStatement, 400, 363);
+        AddExpenseCtrl addExpenseCtrl = AddExpenseCtrl.getInstance();
+        addExpenseCtrl.initialise(this, statement);
     }
 
 
