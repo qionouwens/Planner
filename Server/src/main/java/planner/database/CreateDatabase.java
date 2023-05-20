@@ -1,8 +1,12 @@
 package planner.database;
 
+import planner.database.controller.DateDBController;
+
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 
 public class CreateDatabase {
     private final Connection connection;
@@ -30,6 +34,7 @@ public class CreateDatabase {
         createWeight();
         createSteps();
         createStreef();
+        addCleaningTasks();
     }
 
     private void createCalendarItem() {
@@ -134,7 +139,9 @@ public class CreateDatabase {
         String sql = "CREATE TABLE IF NOT EXISTS cleaningTask ( " +
                 "task TEXT PRIMARY KEY, " +
                 "frequency INTEGER, " +
-                "last_done TEXT " +
+                "date_id INTEGER, " +
+                "FOREIGN KEY (date_id) " +
+                "   REFERENCES dateTable (date_id) " +
                 ");";
 
         try {
@@ -335,6 +342,43 @@ public class CreateDatabase {
             System.out.println(e.getMessage());
             System.out.println("streef");
         }
+    }
+
+    private void addCleaningTask(String task, int frequency, int date_id) {
+        String sql = "INSERT INTO cleaningTask (task, frequency, date_id) " +
+                " VALUES(?, ?, ?); ";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, task);
+            stmt.setInt(2, frequency);
+            stmt.setInt(3, date_id);
+            stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void addCleaningTasks() {
+        LocalDateTime now = LocalDateTime.now();
+        DateDBController dateDBController = new DateDBController();
+        int date_id;
+        try {
+            date_id = dateDBController.getId(now.getYear(), now.getMonthValue(), now.getDayOfMonth());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        addCleaningTask("Afwas", 2, date_id);
+        addCleaningTask("Opruimen", 3, date_id);
+        addCleaningTask("Stofzuigen", 7, date_id);
+        addCleaningTask("Dweilen", 7, date_id);
+        addCleaningTask("Badkamer", 14, date_id);
+        addCleaningTask("Koelkast", 7, date_id);
+        addCleaningTask("Keuken", 28, date_id);
+        addCleaningTask("Bed", 84, date_id);
+        addCleaningTask("Was", 3, date_id);
+        addCleaningTask("Woonkamer", 182, date_id);
+        addCleaningTask("Plankjes", 182, date_id);
+        addCleaningTask("Ramen", 182, date_id);
     }
 
     public static void main(String[] args) {
