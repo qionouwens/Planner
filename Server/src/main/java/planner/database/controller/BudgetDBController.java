@@ -52,9 +52,9 @@ public class BudgetDBController {
     public List<ResultCategory> getResultCategory(int year, int month) {
         String sql = "SELECT c.category_id, name, SUM(amount) AS total, budget " +
                 "   FROM expenseCategory c" +
-                "       JOIN incomeExpense e ON c.category_id = e.category_id" +
-                "       JOIN dateTable d ON e.date_id = d.date_id" +
-                "   WHERE year = ? AND month = ? AND isIncome = 0 " +
+                "       LEFT JOIN incomeExpense e ON c.category_id = e.category_id" +
+                "       LEFT JOIN dateTable d ON e.date_id = d.date_id" +
+                "   WHERE (year = ? AND month = ? AND isIncome = 0) OR d.date_id is null " +
                 "   GROUP BY name ";
         try {
             PreparedStatement stmt;

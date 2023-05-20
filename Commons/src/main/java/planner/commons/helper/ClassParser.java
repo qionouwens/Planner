@@ -89,9 +89,6 @@ public class ClassParser {
 
     public static ResultCategory getResult(String result) {
         Scanner scanner = new Scanner(result);
-        if (result.charAt(0) == '[') {
-            return null;
-        }
         scanner.useDelimiter(",");
         int id = getInteger(scanner.next());
         String name = getString(scanner.next());
@@ -103,7 +100,7 @@ public class ClassParser {
     }
 
     public static List<ResultCategory> getResultList(String resultList) {
-        if (resultList.charAt(0) == '[') {
+        if (resultList.charAt(0) == '[' && resultList.charAt(1) == ']') {
             return new ArrayList<>();
         }
         List<ResultCategory> results = new ArrayList<>();
