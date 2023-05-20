@@ -152,7 +152,7 @@
       </AnchorPane>
       <AnchorPane layoutX="720.0" layoutY="512.0" prefHeight="512.0" prefWidth="360.0" style="-fx-border-color: black;">
          <children>
-            <Button layoutX="14.0" layoutY="402.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="334.0" text="Jaaroverzicht" />
+            <Button layoutX="14.0" layoutY="402.0" mnemonicParsing="false" onAction="#showYearView" prefHeight="25.0" prefWidth="334.0" text="Jaaroverzicht" />
             <Button layoutX="14.0" layoutY="437.0" mnemonicParsing="false" onAction="#seeExpenses" prefHeight="25.0" prefWidth="334.0" text="Zie Uitgaven/Inkomsten" />
             <Button layoutX="14.0" layoutY="473.0" mnemonicParsing="false" onAction="#changeBudget" prefHeight="25.0" prefWidth="334.0" text="Verander Budget" />
             <ScrollPane hbarPolicy="NEVER" prefHeight="392.0" prefWidth="360.0">

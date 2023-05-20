@@ -75,6 +75,13 @@ public class MainUICtrl {
         addExpenseCtrl.initialise(this, statement);
     }
 
+    public void showYearView() {
+        String yearView = "BudgetYearView.fxml";
+        showStage(yearView, 1440, 598);
+        YearViewCtrl yearViewCtrl = YearViewCtrl.getInstance();
+        yearViewCtrl.initialise(this);
+    }
+
 
     public void showStage(String fxmlScene, int width, int height) {
         try {

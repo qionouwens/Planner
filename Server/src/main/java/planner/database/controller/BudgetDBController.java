@@ -54,7 +54,7 @@ public class BudgetDBController {
                 "   FROM expenseCategory c" +
                 "       LEFT JOIN incomeExpense e ON c.category_id = e.category_id" +
                 "       LEFT JOIN dateTable d ON e.date_id = d.date_id" +
-                "   WHERE (year = ? AND month = ? AND isIncome = 0) OR d.date_id is null " +
+                "   WHERE (year = ? AND month = ? AND isIncome = 0) OR d.date_id is null AND budget > 0 " +
                 "   GROUP BY name ";
         try {
             PreparedStatement stmt;
@@ -73,7 +73,7 @@ public class BudgetDBController {
                 "   FROM expenseCategory c" +
                 "       LEFT JOIN incomeExpense e ON c.category_id = e.category_id" +
                 "       LEFT JOIN dateTable d ON e.date_id = d.date_id" +
-                "   WHERE (year = ? AND month = ? AND isIncome = 1) OR d.date_id is null " +
+                "   WHERE (year = ? AND month = ? AND isIncome = 1) OR d.date_id is null AND budget = 0 " +
                 "   GROUP BY name ";
         try {
             PreparedStatement stmt;

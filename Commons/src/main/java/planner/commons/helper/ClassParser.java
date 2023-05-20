@@ -82,6 +82,9 @@ public class ClassParser {
 
     public static List<StatementCategory> getCategoryList(String categoryList) {
         List<StatementCategory> categories = new ArrayList<>();
+        if (categoryList.equals("[]")) {
+            return categories;
+        }
         Scanner scanner = new Scanner(categoryList);
         scanner.useDelimiter("},");
         while (scanner.hasNext()) {
@@ -142,6 +145,6 @@ public class ClassParser {
         scanner.useDelimiter(":");
         scanner.next();
         String result = scanner.next();
-        return result.equals("true");
+        return result.contains("true");
     }
 }

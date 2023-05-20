@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="598.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.client.sceneControllers.YearViewCtrl">
+   <children>
+      <TableView fx:id="incomeTable" layoutY="33.0" prefHeight="200.0" prefWidth="1440.0">
+        <columns>
+          <TableColumn fx:id="incat" prefWidth="120.0" text="Category" />
+          <TableColumn fx:id="injan" prefWidth="110.0" text="Jan" />
+            <TableColumn fx:id="infeb" prefWidth="110.0" text="Feb" />
+            <TableColumn fx:id="inmar" prefWidth="110.0" text="Mar" />
+            <TableColumn fx:id="inapr" prefWidth="110.0" text="Apr" />
+            <TableColumn fx:id="inmay" prefWidth="110.0" text="May" />
+            <TableColumn fx:id="injun" prefWidth="110.0" text="Jun" />
+            <TableColumn fx:id="injul" prefWidth="110.0" text="Jul" />
+            <TableColumn fx:id="inaug" prefWidth="110.0" text="Aug" />
+            <TableColumn fx:id="insep" prefWidth="110.0" text="Sep" />
+            <TableColumn fx:id="inokt" prefWidth="110.0" text="Okt" />
+            <TableColumn fx:id="innov" prefWidth="110.0" text="Nov" />
+            <TableColumn fx:id="indec" prefWidth="110.0" text="Dec" />
+        </columns>
+      </TableView>
+      <TableView fx:id="expenseTable" layoutY="268.0" prefHeight="360.0" prefWidth="1440.0">
+         <columns>
+            <TableColumn fx:id="excat" prefWidth="120.0" text="Category" />
+            <TableColumn fx:id="exjan" prefWidth="110.0" text="Jan" />
+            <TableColumn fx:id="exfeb" prefWidth="110.0" text="Feb" />
+            <TableColumn fx:id="exmar" prefWidth="110.0" text="Mar" />
+            <TableColumn fx:id="exapr" prefWidth="110.0" text="Apr" />
+            <TableColumn fx:id="exmay" prefWidth="110.0" text="May" />
+            <TableColumn fx:id="exjun" prefWidth="110.0" text="Jun" />
+            <TableColumn fx:id="exjul" prefWidth="110.0" text="Jul" />
+            <TableColumn fx:id="exaug" prefWidth="110.0" text="Aug" />
+            <TableColumn fx:id="exsep" prefWidth="110.0" text="Sep" />
+            <TableColumn fx:id="exokt" prefWidth="110.0" text="Okt" />
+            <TableColumn fx:id="exnov" prefWidth="110.0" text="Nov" />
+            <TableColumn fx:id="exdec" prefWidth="110.0" text="Dec" />
+         </columns>
+      </TableView>
+      <Label prefHeight="29.0" prefWidth="173.0" text="Income">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutY="233.0" prefHeight="29.0" prefWidth="173.0" text="Expenses">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Button layoutX="1415.0" layoutY="2.0" mnemonicParsing="false" onAction="#close" text="x" />
+   </children>
+</AnchorPane>

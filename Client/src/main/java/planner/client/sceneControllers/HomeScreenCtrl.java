@@ -208,4 +208,6 @@ public class HomeScreenCtrl {
     public void seeExpenses() {
         mainUICtrl.showExpenses();
     }
+
+    public void showYearView() {mainUICtrl.showYearView();}
 }
