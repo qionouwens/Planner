@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ClassParser {
     public static List<CalendarItem> parseCalendarList(String calendarString) {
@@ -135,6 +137,35 @@ public class ClassParser {
             results.add(getResult(scanner.next()));
         }
         return results;
+    }
+
+    public static List<String> getStringList(String stringList) {
+        List<String> result = new ArrayList<>();
+        if (stringList.equals("[]")) {
+            return result;
+        }
+        stringList = stringList.replaceAll("[\\[\\]\"]", "");
+        Scanner scanner = new Scanner(stringList);
+        scanner.useDelimiter(",");
+        while(scanner.hasNext()) {
+            result.add(scanner.next());
+        }
+        return result;
+    }
+
+    public static UpdateDay getUpdateDay(String updateDayString) {
+        Pattern listPattern = Pattern.compile("\\[.*]");
+        Scanner scanner = new Scanner(updateDayString);
+        scanner.useDelimiter(",");
+        String dateString = scanner.next();
+        GregorianCalendar calendar = getDate(dateString);
+        Matcher matcher = listPattern.matcher(updateDayString);
+        String stringList = null;
+        if (matcher.find()) {
+            stringList = matcher.group();
+        }
+        List<String> cats = getStringList(stringList);
+        return new UpdateDay(calendar, cats);
     }
 
     static int getInteger(String idString) {

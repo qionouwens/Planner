@@ -14,11 +14,13 @@ import planner.client.MainUICtrl;
 import planner.client.serverUtils.BudgetServerUtils;
 import planner.client.serverUtils.CalendarServerUtils;
 import planner.client.serverUtils.CleaningServerUtils;
+import planner.client.serverUtils.UpdateServerUtils;
 import planner.client.views.CalendarItemView;
 import planner.client.views.DailyScheduleView;
 import planner.commons.CalendarItem;
 import planner.commons.CleaningTask;
 import planner.commons.ResultCategory;
+import planner.commons.UpdateDay;
 import planner.commons.helper.DateConversion;
 
 import java.time.LocalDateTime;
@@ -66,6 +68,8 @@ public class HomeScreenCtrl {
     private TableColumn<ResultCategory, Integer> left;
     @FXML
     private GridPane cleaningGrid;
+    @FXML
+    private ProgressIndicator progress;
     private List<CleaningTask> cleaningTasks;
     private static HomeScreenCtrl INSTANCE;
     private MainUICtrl mainUICtrl;
@@ -90,6 +94,7 @@ public class HomeScreenCtrl {
         setCalendarItems();
         setDailySchedule();
         setCleaningGrid();
+        setDailyScreen();
     }
 
     public static HomeScreenCtrl getINSTANCE() {
@@ -219,6 +224,14 @@ public class HomeScreenCtrl {
         }
     }
 
+    public void setDailyScreen() {
+        UpdateServerUtils updateServerUtils = new UpdateServerUtils();
+        List<String> categories = updateServerUtils.getCategories();
+        int[] dates = DateConversion.getDateArray(today);
+        UpdateDay updateDay = updateServerUtils.getUpdateDay(dates[0], dates[1], dates[2]);
+        progress.setProgress((double) updateDay.getCategoryMap().size() / categories.size());
+    }
+
     public void changeTask() {
         for (int i = 0; i < 12; i++) {
             Button button = new Button("Gedaan");
@@ -258,4 +271,8 @@ public class HomeScreenCtrl {
     }
 
     public void showYearView() {mainUICtrl.showYearView();}
+
+    public void showUpdateView() {
+        mainUICtrl.showUpdateQuestions();
+    }
 }

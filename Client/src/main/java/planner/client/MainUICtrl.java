@@ -82,6 +82,13 @@ public class MainUICtrl {
         yearViewCtrl.initialise(this);
     }
 
+    public void showUpdateQuestions() {
+        String updateView = "UpdateQuestions.fxml";
+        showStage(updateView, 600, 400);
+        UpdateQuestionsCtrl updateQuestionsCtrl = UpdateQuestionsCtrl.getInstance();
+        LocalDateTime now = LocalDateTime.now();
+        updateQuestionsCtrl.initialise(this, DateConversion.getDate(now.getYear(), now.getMonthValue(), now.getDayOfMonth()));
+    }
 
     public void showStage(String fxmlScene, int width, int height) {
         try {

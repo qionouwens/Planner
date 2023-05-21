@@ -9,6 +9,8 @@ public class UpdateDay {
     private GregorianCalendar calendar;
     private List<String> categoryMap;
 
+    public UpdateDay() {}
+
     public UpdateDay(GregorianCalendar calendar, List<String> categoryMap) {
         this.calendar = calendar;
         this.categoryMap = categoryMap;
