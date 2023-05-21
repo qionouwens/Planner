@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.client.UpdateQuestions">
+   <children>
+      <Label alignment="CENTER" layoutX="127.0" layoutY="14.0" prefHeight="32.0" prefWidth="347.0" text="Monday 17/4/2023">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <CheckBox layoutX="55.0" layoutY="62.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="176.0" text="Wakker voor 10:00" />
+      <Button layoutX="14.0" layoutY="188.0" mnemonicParsing="false" text="&lt;" />
+      <Button layoutX="561.0" layoutY="188.0" mnemonicParsing="false" text="&gt;" />
+      <Button layoutX="575.0" layoutY="2.0" mnemonicParsing="false" text="x" />
+      <CheckBox layoutX="301.0" layoutY="65.0" mnemonicParsing="false" text="Ontbeten" />
+      <CheckBox layoutX="55.0" layoutY="93.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="167.0" text="Gaan slapen voor 23:00" />
+   </children>
+</AnchorPane>
