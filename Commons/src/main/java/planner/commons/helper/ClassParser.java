@@ -1,9 +1,6 @@
 package planner.commons.helper;
 
-import planner.commons.CalendarItem;
-import planner.commons.ResultCategory;
-import planner.commons.Statement;
-import planner.commons.StatementCategory;
+import planner.commons.*;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -12,7 +9,7 @@ import java.util.Scanner;
 
 public class ClassParser {
     public static List<CalendarItem> parseCalendarList(String calendarString) {
-        if (calendarString.charAt(0) == '[') {
+        if (calendarString.equals("[]")) {
             return new ArrayList<>();
         }
         List<CalendarItem> calendarItems = new ArrayList<>();
@@ -93,6 +90,28 @@ public class ClassParser {
         return categories;
     }
 
+    public static List<CleaningTask> getCleaningTaskList(String cleaningTaskList) {
+        List<CleaningTask> cleaningTasks = new ArrayList<>();
+        if (cleaningTaskList.equals("[]")) {
+            return cleaningTasks;
+        }
+        Scanner scanner = new Scanner(cleaningTaskList);
+        scanner.useDelimiter("},");
+        while (scanner.hasNext()) {
+            cleaningTasks.add(getCleaningTask(scanner.next()));
+        }
+        return cleaningTasks;
+    }
+
+    public static CleaningTask getCleaningTask(String cleaningTask) {
+        Scanner scanner = new Scanner(cleaningTask);
+        scanner.useDelimiter(",");
+        String name = getString(scanner.next());
+        int frequency = getInteger(scanner.next());
+        GregorianCalendar calendar = getDate(scanner.next());
+        return new CleaningTask(name, frequency, calendar);
+    }
+
     public static ResultCategory getResult(String result) {
         Scanner scanner = new Scanner(result);
         scanner.useDelimiter(",");
@@ -134,9 +153,13 @@ public class ClassParser {
     }
 
     static GregorianCalendar getDate(String dateString) {
-        String year = dateString.substring(8, 12);
-        String month = dateString.substring(13, 15);
-        String day = dateString.substring(16, 18);
+        Scanner scanner = new Scanner(dateString);
+        scanner.useDelimiter(":");
+        scanner.next();
+        String isolatedDate = scanner.next();
+        String year = isolatedDate.substring(1, 5);
+        String month = isolatedDate.substring(6, 8);
+        String day = isolatedDate.substring(9, 11);
         return DateConversion.getDate(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
     }
 

@@ -1,10 +1,7 @@
 package planner.server.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import planner.commons.CleaningTask;
 import planner.database.controller.CleaningDBController;
 
@@ -20,7 +17,7 @@ public class CleaningController {
     }
 
     @PostMapping("/")
-    public void doTask(String task) {
+    public void doTask(@RequestBody String task) {
         cleaningDBController.doTask(task);
     }
 }

@@ -9,20 +9,20 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import planner.client.MainUICtrl;
 import planner.client.serverUtils.BudgetServerUtils;
 import planner.client.serverUtils.CalendarServerUtils;
+import planner.client.serverUtils.CleaningServerUtils;
 import planner.client.views.CalendarItemView;
 import planner.client.views.DailyScheduleView;
 import planner.commons.CalendarItem;
+import planner.commons.CleaningTask;
 import planner.commons.ResultCategory;
 import planner.commons.helper.DateConversion;
 
 import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Comparator;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 public class HomeScreenCtrl {
     private static class CalendarItemComparator implements Comparator<CalendarItem> {
@@ -64,6 +64,9 @@ public class HomeScreenCtrl {
     private TableColumn<ResultCategory, Integer> spend;
     @FXML
     private TableColumn<ResultCategory, Integer> left;
+    @FXML
+    private GridPane cleaningGrid;
+    private List<CleaningTask> cleaningTasks;
     private static HomeScreenCtrl INSTANCE;
     private MainUICtrl mainUICtrl;
     private GregorianCalendar today;
@@ -78,12 +81,15 @@ public class HomeScreenCtrl {
         LocalDateTime now = LocalDateTime.now();
         today = DateConversion.getDate(now.getYear(), now.getMonthValue(), now.getDayOfMonth());
         currentDate = DateConversion.getDate(now.getYear(), now.getMonthValue(), now.getDayOfMonth());
+        CleaningServerUtils cleaningServerUtils = new CleaningServerUtils();
+        cleaningTasks = cleaningServerUtils.getTasks();
         initialiseTable();
         setTable();
         setWeek();
         setHours();
         setCalendarItems();
         setDailySchedule();
+        setCleaningGrid();
     }
 
     public static HomeScreenCtrl getINSTANCE() {
@@ -183,6 +189,48 @@ public class HomeScreenCtrl {
         List<ResultCategory> results = budgetServerUtils.getResultForThisMonth(now.getYear(), now.getMonthValue());
         categories = FXCollections.observableList(results);
         table.setItems(categories);
+    }
+
+    public void setCleaningGrid() {
+        cleaningGrid.getChildren().clear();
+        cleaningGrid.setGridLinesVisible(true);
+        for (int i = 0; i < 12; i++) {
+            CleaningTask task = cleaningTasks.get(i);
+            Label name = new Label(task.getName());
+            name.setPrefSize(119, 39);
+            name.setFont(new Font(22));
+            GregorianCalendar lastDone = task.getLast_done();
+            Label lastDoneDate = new Label(DateConversion.getStringFromDate(lastDone));
+            lastDoneDate.setPrefSize(119, 39);
+            lastDoneDate.setFont(new Font(22));
+            GregorianCalendar nextDo = task.getLast_done();
+            nextDo.add(Calendar.DAY_OF_MONTH, task.getFrequency());
+            Label nextDoDate = new Label(DateConversion.getStringFromDate(nextDo));
+            nextDoDate.setPrefSize(119, 39);
+            nextDoDate.setFont(new Font(22));
+            int compare = nextDo.compareTo(today);
+            String color = compare > 0 ? "lime" : "red";
+            name.setStyle("-fx-background-color: " + color);
+            nextDoDate.setStyle("-fx-background-color: " + color);
+            lastDoneDate.setStyle("-fx-background-color: " + color);
+            cleaningGrid.add(name, 0, i);
+            cleaningGrid.add(nextDoDate, 1, i);
+            cleaningGrid.add(lastDoneDate, 2, i);
+        }
+    }
+
+    public void changeTask() {
+        for (int i = 0; i < 12; i++) {
+            Button button = new Button("Gedaan");
+            button.setPrefSize(220, 32);
+            CleaningServerUtils cleaningServerUtils = new CleaningServerUtils();
+            int finalI = i;
+            button.setOnAction(event -> {
+                cleaningServerUtils.doTask(cleaningTasks.get(finalI).getName());
+                initialise(mainUICtrl);
+            });
+            cleaningGrid.add(button, 1, i, 2, 1);
+        }
     }
 
     public void prevWeek() {

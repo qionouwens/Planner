@@ -17,12 +17,12 @@ public class CleaningDBController {
     private final DateDBController dateDBController = new DateDBController();
 
     public List<CleaningTask> getTasks() {
-        String sql = "SELECT task, frequency, year, month, day " +
+        String sql = "SELECT c.task, c.frequency, dT.year, dT.month, dT.day " +
                 "    FROM cleaningTask c " +
                 "       JOIN dateTable dT on c.date_id = dT.date_id ; ";
         try {
             PreparedStatement stmt = connect.getConnection().prepareStatement(sql);
-            ResultSet result = stmt.getResultSet();
+            ResultSet result = stmt.executeQuery();
             return getListFromResult(result);
         } catch (SQLException e) {
             throw new RuntimeException(e);
