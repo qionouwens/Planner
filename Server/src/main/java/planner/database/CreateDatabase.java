@@ -35,6 +35,7 @@ public class CreateDatabase {
         createSteps();
         createStreef();
         addCleaningTasks();
+        updateCategories();
     }
 
     private void createCalendarItem() {
@@ -236,11 +237,13 @@ public class CreateDatabase {
 
     private void createUpdate() {
         String sql = "CREATE TABLE IF NOT EXISTS updateTable ( " +
-                "update_date TEXT, " +
+                "date_id INTEGER, " +
                 "category_id INTEGER, " +
-                "PRIMARY KEY(update_date, category_id), " +
+                "PRIMARY KEY(date_id, category_id), " +
                 "FOREIGN KEY (category_id) " +
-                "   REFERENCES updateCategory (category_id) " +
+                "   REFERENCES updateCategory (category_id), " +
+                "FOREIGN KEY (date_id) " +
+                "   REFERENCES dateTable (date_id) " +
                 ");";
         try {
             Statement stmt = connection.createStatement();
@@ -379,6 +382,41 @@ public class CreateDatabase {
         addCleaningTask("Woonkamer", 182, date_id);
         addCleaningTask("Plankjes", 182, date_id);
         addCleaningTask("Ramen", 182, date_id);
+    }
+
+    private void updateCategory(String name) {
+        String sql = "INSERT INTO updateCategory (name) " +
+                "    VALUES(?) ";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, name);
+            stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void updateCategories() {
+        updateCategory("Wakker voor 10:00");
+        updateCategory("Gaan slapen voor 00:00");
+        updateCategory("Dagplanning gemaakt");
+        updateCategory("10000 stappen");
+        updateCategory("Gewogen");
+        updateCategory("Geen alcohol gehad");
+        updateCategory("Geschaakt");
+        updateCategory("Gewerkt aan een project");
+        updateCategory("Gestudeerd");
+        updateCategory("Ontbeten");
+        updateCategory("Gelunched");
+        updateCategory("Avondgegeten");
+        updateCategory("Geen Thuisbezorgd");
+        updateCategory("Opgeruimd");
+        updateCategory("Schoongemaakt");
+        updateCategory("Was gedaan");
+        updateCategory("Budget Geupdated");
+        updateCategory("Half uur buiten geweest");
+        updateCategory("'s ochtends getandenpoetst");
+        updateCategory("Geen Frisdrank");
     }
 
     public static void main(String[] args) {
