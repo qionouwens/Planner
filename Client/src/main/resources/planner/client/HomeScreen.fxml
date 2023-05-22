@@ -233,5 +233,19 @@
             <Button layoutX="289.0" layoutY="440.0" mnemonicParsing="false" text="Add" />
          </children>
       </AnchorPane>
+      <AnchorPane layoutX="1080.0" layoutY="512.0" prefHeight="512.0" prefWidth="360.0">
+         <children>
+            <Button layoutX="23.0" layoutY="15.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" text="Today" />
+            <Button layoutX="23.0" layoutY="315.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" text="Within 6 Months" />
+            <Button layoutX="23.0" layoutY="255.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" text="Within 3 Months" />
+            <Button layoutX="23.0" layoutY="195.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" text="This Month" />
+            <Button layoutX="23.0" layoutY="135.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" text="This Week" />
+            <Button layoutX="23.0" layoutY="75.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" text="Within 3 days" />
+            <Button layoutX="23.0" layoutY="435.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" text="Ever" />
+            <Button layoutX="23.0" layoutY="375.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" text="This Year" />
+            <Button layoutX="168.0" layoutY="486.0" mnemonicParsing="false" text="+" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="512.0" prefHeight="512.0" prefWidth="360.0" />
    </children>
 </AnchorPane>
