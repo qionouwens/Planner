@@ -2,18 +2,28 @@ package planner.commons;
 
 import java.util.Objects;
 
-public class InventroyItem {
+public class InventoryItem {
+    private int id;
     private String item;
     private int quantity;
     private String location;
 
-    public InventroyItem() {
+    public InventoryItem() {
     }
 
-    public InventroyItem(String item, int quantity, String location) {
+    public InventoryItem(int id, String item, int quantity, String location) {
+        this.id = id;
         this.item = item;
         this.quantity = quantity;
         this.location = location;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getItem() {
@@ -44,19 +54,20 @@ public class InventroyItem {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        InventroyItem that = (InventroyItem) o;
-        return quantity == that.quantity && Objects.equals(item, that.item) && Objects.equals(location, that.location);
+        InventoryItem that = (InventoryItem) o;
+        return id == that.id && quantity == that.quantity && Objects.equals(item, that.item) && Objects.equals(location, that.location);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(item, quantity, location);
+        return Objects.hash(id, item, quantity, location);
     }
 
     @Override
     public String toString() {
-        return "InventroyItem{" +
-                "item='" + item + '\'' +
+        return "InventoryItem{" +
+                "id=" + id +
+                ", item='" + item + '\'' +
                 ", quantity=" + quantity +
                 ", location='" + location + '\'' +
                 '}';
