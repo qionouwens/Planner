@@ -9,13 +9,9 @@ import java.sql.Statement;
 import java.time.LocalDateTime;
 
 public class CreateDatabase {
-    private final Connection connection;
+    private static final Connection connection = new Connect().getConnection();
 
-    public CreateDatabase() {
-        connection = new Connect().getConnection();
-    }
-
-    public void create() {
+    public static void create() {
         createCalendarItem();
         createDateTable();
         createTodo();
@@ -32,13 +28,16 @@ public class CreateDatabase {
         createTraining();
         createTrainingPart();
         createWeight();
-        createSteps();
+        createSleep();
         createStreef();
         addCleaningTasks();
         updateCategories();
+        initialiseGroceryTypes();
+        setPriorities();
+        setLocation();
     }
 
-    private void createCalendarItem() {
+    private static void createCalendarItem() {
         String sql = "CREATE TABLE IF NOT EXISTS calendarItem ( " +
                 "calendar_id INTEGER PRIMARY KEY, " +
                 "title TEXT, " +
@@ -61,7 +60,7 @@ public class CreateDatabase {
         }
     }
 
-    private void createDateTable() {
+    private static void createDateTable() {
         String sql = "CREATE TABLE IF NOT EXISTS dateTable ( " +
                 "date_id INTEGER PRIMARY KEY, " +
                 "day INTEGER, " +
@@ -77,7 +76,7 @@ public class CreateDatabase {
         }
     }
 
-    private void createTodo() {
+    private static void createTodo() {
         String sql = "CREATE TABLE IF NOT EXISTS todo ( " +
                 "id INTEGER PRIMARY KEY, " +
                 "description TEXT, " +
@@ -98,7 +97,7 @@ public class CreateDatabase {
         }
     }
 
-    private void createExpenseCategory() {
+    private static void createExpenseCategory() {
         String sql = "CREATE TABLE IF NOT EXISTS expenseCategory ( " +
                 "category_id INTEGER PRIMARY KEY, " +
                 "name TEXT, " +
@@ -114,7 +113,7 @@ public class CreateDatabase {
         }
     }
 
-    private void createIncomeExpense() {
+    private static void createIncomeExpense() {
         String sql = "CREATE TABLE IF NOT EXISTS incomeExpense ( " +
                 "id INTEGER PRIMARY KEY, " +
                 "isIncome INTEGER, " +
@@ -136,7 +135,7 @@ public class CreateDatabase {
         }
     }
 
-    private void createCleaningTask() {
+    private static void createCleaningTask() {
         String sql = "CREATE TABLE IF NOT EXISTS cleaningTask ( " +
                 "task TEXT PRIMARY KEY, " +
                 "frequency INTEGER, " +
@@ -154,7 +153,7 @@ public class CreateDatabase {
         }
     }
 
-    private void createGrocery() {
+    private static void createGrocery() {
         String sql = "CREATE TABLE IF NOT EXISTS grocery ( " +
                 "grocery_id INTEGER PRIMARY KEY, " +
                 "description TEXT, " +
@@ -175,7 +174,7 @@ public class CreateDatabase {
         }
     }
 
-    private void createPriority() {
+    private static void createPriority() {
         String sql = "CREATE TABLE IF NOT EXISTS priority ( " +
                 "priority_id INTEGER PRIMARY KEY, " +
                 "level TEXT " +
@@ -189,7 +188,7 @@ public class CreateDatabase {
         }
     }
 
-    private void createGroceryType() {
+    private static void createGroceryType() {
         String sql = "CREATE TABLE IF NOT EXISTS groceryType ( " +
                 "type_id INTEGER PRIMARY KEY, " +
                 "label TEXT " +
@@ -203,7 +202,7 @@ public class CreateDatabase {
         }
     }
 
-    private void createInventory() {
+    private static void createInventory() {
         String sql = "CREATE TABLE IF NOT EXISTS inventory ( " +
                 "inventory_id INTEGER PRIMARY KEY, " +
                 "description TEXT, " +
@@ -221,7 +220,7 @@ public class CreateDatabase {
         }
     }
 
-    private void createLocation() {
+    private static void createLocation() {
         String sql = "CREATE TABLE IF NOT EXISTS location ( " +
                 "location_id INTEGER PRIMARY KEY, " +
                 "location_name TEXT " +
@@ -235,7 +234,7 @@ public class CreateDatabase {
         }
     }
 
-    private void createUpdate() {
+    private static void createUpdate() {
         String sql = "CREATE TABLE IF NOT EXISTS updateTable ( " +
                 "date_id INTEGER, " +
                 "category_id INTEGER, " +
@@ -254,7 +253,7 @@ public class CreateDatabase {
         }
     }
 
-    private void createUpdateCategory() {
+    private static void createUpdateCategory() {
         String sql = "CREATE TABLE IF NOT EXISTS updateCategory ( " +
                 "category_id INTEGER PRIMARY KEY, " +
                 "name TEXT " +
@@ -268,7 +267,7 @@ public class CreateDatabase {
         }
     }
 
-    private void createTraining() {
+    private static void createTraining() {
         String sql = "CREATE TABLE IF NOT EXISTS training ( " +
                 "training_id INTEGER PRIMARY KEY, " +
                 "training_type TEXT, " +
@@ -286,7 +285,7 @@ public class CreateDatabase {
         }
     }
 
-    private void createTrainingPart() {
+    private static void createTrainingPart() {
         String sql = "CREATE TABLE IF NOT EXISTS trainingPart ( " +
                 "training_part_id INTEGER, " +
                 "training_id INTEGER, " +
@@ -305,10 +304,12 @@ public class CreateDatabase {
         }
     }
 
-    private void createWeight() {
+    private static void createWeight() {
         String sql = "CREATE TABLE IF NOT EXISTS weight ( " +
-                "weighted_date TEXT PRIMARY KEY, " +
-                "weight_value INTEGER " +
+                "date_id TEXT PRIMARY KEY, " +
+                "weight_value INTEGER," +
+                "FOREIGN KEY (date_id) " +
+                "   REFERENCES dateTable (date_id) " +
                 ");";
         try {
             Statement stmt = connection.createStatement();
@@ -319,10 +320,13 @@ public class CreateDatabase {
         }
     }
 
-    private void createSteps() {
-        String sql = "CREATE TABLE IF NOT EXISTS steps ( " +
-                "steps_date TEXT PRIMARY KEY, " +
-                "step_value INTEGER " +
+    private static void createSleep() {
+        String sql = "CREATE TABLE IF NOT EXISTS sleep ( " +
+                "date_id TEXT PRIMARY KEY, " +
+                "sleep_hour INTEGER," +
+                "sleep_minute INTEGER," +
+                "FOREIGN KEY (date_id) " +
+                "   REFERENCES dateTable (date_id) " +
                 ");";
         try {
             Statement stmt = connection.createStatement();
@@ -333,7 +337,7 @@ public class CreateDatabase {
         }
     }
 
-    private void createStreef() {
+    private static void createStreef() {
         String sql = "CREATE TABLE IF NOT EXISTS streef ( " +
                 "training TEXT PRIMARY KEY, " +
                 "streef_value TEXT " +
@@ -347,7 +351,7 @@ public class CreateDatabase {
         }
     }
 
-    private void addCleaningTask(String task, int frequency, int date_id) {
+    private static void addCleaningTask(String task, int frequency, int date_id) {
         String sql = "INSERT INTO cleaningTask (task, frequency, date_id) " +
                 " VALUES(?, ?, ?); ";
         try {
@@ -361,7 +365,7 @@ public class CreateDatabase {
         }
     }
 
-    private void addCleaningTasks() {
+    private static void addCleaningTasks() {
         LocalDateTime now = LocalDateTime.now();
         DateDBController dateDBController = new DateDBController();
         int date_id;
@@ -384,7 +388,7 @@ public class CreateDatabase {
         addCleaningTask("Ramen", 182, date_id);
     }
 
-    private void updateCategory(String name) {
+    private static void updateCategory(String name) {
         String sql = "INSERT INTO updateCategory (name) " +
                 "    VALUES(?) ";
         try {
@@ -396,12 +400,13 @@ public class CreateDatabase {
         }
     }
 
-    private void updateCategories() {
+    private static void updateCategories() {
         updateCategory("Wakker voor 10:00");
         updateCategory("Gaan slapen voor 00:00");
         updateCategory("Dagplanning gemaakt");
         updateCategory("10000 stappen");
         updateCategory("Gewogen");
+        updateCategory("Slaap Ingevoerd");
         updateCategory("Geen alcohol gehad");
         updateCategory("Geschaakt");
         updateCategory("Gewerkt aan een project");
@@ -419,8 +424,60 @@ public class CreateDatabase {
         updateCategory("Geen Frisdrank");
     }
 
+    public static void insertGroceryType(String type) {
+        String sql = "INSERT INTO groceryType (label) " +
+                "VALUES(?)";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, type);
+            stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void initialiseGroceryTypes() {
+        insertGroceryType("Grocery");
+        insertGroceryType("Misc");
+    }
+
+    public static void insertPriority(String priority) {
+        String sql = "INSERT INTO priority (level) " +
+                "VALUES (?)";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, priority);
+            stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void setPriorities() {
+        insertPriority("High");
+        insertPriority("Medium");
+        insertPriority("Low");
+    }
+
+    public static void insertLocation(String location) {
+        String sql = "INSERT INTO location (location_name) " +
+                "VALUES(?) ";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, location);
+            stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void setLocation() {
+        insertLocation("Fridge");
+        insertLocation("Closets");
+        insertLocation("Misc");
+    }
+
     public static void main(String[] args) {
-        CreateDatabase createDatabase = new CreateDatabase();
-        createDatabase.create();
+        create();
     }
 }

@@ -3,23 +3,33 @@ package planner.commons;
 import java.util.Objects;
 
 public class GroceryItem {
+    private int id;
     private String item;
     private int quantity;
     private String priority;
-    private boolean isGrocery;
+    private String type;
 
     public GroceryItem() {
     }
 
-    public GroceryItem(String item, int quantity, String priority, boolean isGrocery) {
+    public GroceryItem(int id, String item, int quantity, String priority, String type) {
+        this.id = id;
         this.item = item;
         this.quantity = quantity;
         this.priority = priority;
-        this.isGrocery = isGrocery;
+        this.type = type;
     }
 
     public String getItem() {
         return item;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setItem(String item) {
@@ -42,12 +52,12 @@ public class GroceryItem {
         this.priority = priority;
     }
 
-    public boolean isGrocery() {
-        return isGrocery;
+    public String getType() {
+        return type;
     }
 
-    public void setGrocery(boolean grocery) {
-        isGrocery = grocery;
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override
@@ -55,21 +65,22 @@ public class GroceryItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GroceryItem that = (GroceryItem) o;
-        return quantity == that.quantity && isGrocery == that.isGrocery && Objects.equals(item, that.item) && Objects.equals(priority, that.priority);
+        return id == that.id && quantity == that.quantity && Objects.equals(item, that.item) && Objects.equals(priority, that.priority) && Objects.equals(type, that.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(item, quantity, priority, isGrocery);
+        return Objects.hash(id, item, quantity, priority, type);
     }
 
     @Override
     public String toString() {
         return "GroceryItem{" +
-                "item='" + item + '\'' +
+                "id=" + id +
+                ", item='" + item + '\'' +
                 ", quantity=" + quantity +
                 ", priority='" + priority + '\'' +
-                ", isGrocery=" + isGrocery +
+                ", type='" + type + '\'' +
                 '}';
     }
 }
