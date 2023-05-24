@@ -1,17 +1,17 @@
 package planner.commons;
 
-import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Objects;
 
 public class Todo {
     private int id;
     private String description;
-    private Date date;
+    private GregorianCalendar date;
 
     public Todo() {
     }
 
-    public Todo(int id, String description, Date date) {
+    public Todo(int id, String description, GregorianCalendar date) {
         this.id = id;
         this.description = description;
         this.date = date;
@@ -33,11 +33,11 @@ public class Todo {
         this.description = description;
     }
 
-    public Date getDate() {
+    public GregorianCalendar getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(GregorianCalendar date) {
         this.date = date;
     }
 

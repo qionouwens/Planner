@@ -1,6 +1,7 @@
 package planner.database.controller;
 
 import planner.commons.CalendarItem;
+import planner.commons.Todo;
 import planner.commons.helper.DateConversion;
 import planner.database.Connect;
 
@@ -148,7 +149,6 @@ public class CalendarDBController {
     }
 
     public void update(CalendarItem newCalendar) {
-        CalendarItem calendarItem;
         String sql = "UPDATE calendarItem " +
                 " SET title = ?, " +
                 "     date_id = ?, " +
@@ -211,8 +211,9 @@ public class CalendarDBController {
             int endTimeMinute = result.getInt("starttime_minute");
             String endString = endTimeMinute < 10 ? endTimeMinute + "0" : String.valueOf(endTimeMinute);
             String endTime = result.getInt("endtime_hour") + ":" + endString;
+            List<Todo> todoList = TodoDBController.getForCalendarItem(result.getInt("calendar_id"));
             return new CalendarItem(result.getInt("calendar_id"), result.getString("title"),
-                    calendar, startTime, endTime, result.getString("color"), null);
+                    calendar, startTime, endTime, result.getString("color"), todoList);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -221,11 +222,9 @@ public class CalendarDBController {
 
     private List<CalendarItem> getListFromResultSet(ResultSet result) throws SQLException {
         List<CalendarItem> calendarItems = new ArrayList<>();
-        boolean cont = result.next();
-        do {
+        while(result.next()) {
             calendarItems.add(getFromResultSet(result));
-            cont = result.next();
-        } while (cont);
+        }
         return calendarItems;
     }
 }
