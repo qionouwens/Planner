@@ -16,7 +16,7 @@ public class TrainingController {
         return ResponseEntity.ok(TrainingDBController.getTraining());
     }
 
-    @GetMapping("")
+    @GetMapping("/streef")
     public ResponseEntity<List<Streef>> getStreef() {
         return ResponseEntity.ok(TrainingDBController.getStreef());
     }
@@ -26,7 +26,7 @@ public class TrainingController {
         TrainingDBController.addTraining(training);
     }
 
-    @PostMapping("")
+    @PostMapping("/streef")
     public void addStreef(@RequestBody Streef streef) {
         TrainingDBController.addStreef(streef);
     }
