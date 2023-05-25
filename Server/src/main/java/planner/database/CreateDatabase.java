@@ -177,7 +177,7 @@ public class CreateDatabase {
     private static void createPriority() {
         String sql = "CREATE TABLE IF NOT EXISTS priority ( " +
                 "priority_id INTEGER PRIMARY KEY, " +
-                "level TEXT " +
+                "level TEXT UNIQUE " +
                 ");";
         try {
             Statement stmt = connection.createStatement();
@@ -191,7 +191,7 @@ public class CreateDatabase {
     private static void createGroceryType() {
         String sql = "CREATE TABLE IF NOT EXISTS groceryType ( " +
                 "type_id INTEGER PRIMARY KEY, " +
-                "label TEXT " +
+                "label TEXT UNIQUE " +
                 ");";
         try {
             Statement stmt = connection.createStatement();
@@ -223,7 +223,7 @@ public class CreateDatabase {
     private static void createLocation() {
         String sql = "CREATE TABLE IF NOT EXISTS location ( " +
                 "location_id INTEGER PRIMARY KEY, " +
-                "location_name TEXT " +
+                "location_name TEXT UNIQUE " +
                 ");";
         try {
             Statement stmt = connection.createStatement();
@@ -256,7 +256,7 @@ public class CreateDatabase {
     private static void createUpdateCategory() {
         String sql = "CREATE TABLE IF NOT EXISTS updateCategory ( " +
                 "category_id INTEGER PRIMARY KEY, " +
-                "name TEXT " +
+                "name TEXT UNIQUE" +
                 ");";
         try {
             Statement stmt = connection.createStatement();
@@ -352,7 +352,7 @@ public class CreateDatabase {
     }
 
     private static void addCleaningTask(String task, int frequency, int date_id) {
-        String sql = "INSERT INTO cleaningTask (task, frequency, date_id) " +
+        String sql = "INSERT OR IGNORE INTO cleaningTask (task, frequency, date_id) " +
                 " VALUES(?, ?, ?); ";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -389,7 +389,7 @@ public class CreateDatabase {
     }
 
     private static void updateCategory(String name) {
-        String sql = "INSERT INTO updateCategory (name) " +
+        String sql = "INSERT OR IGNORE INTO updateCategory (name) " +
                 "    VALUES(?) ";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -425,7 +425,7 @@ public class CreateDatabase {
     }
 
     public static void insertGroceryType(String type) {
-        String sql = "INSERT INTO groceryType (label) " +
+        String sql = "INSERT OR IGNORE INTO groceryType (label) " +
                 "VALUES(?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -442,7 +442,7 @@ public class CreateDatabase {
     }
 
     public static void insertPriority(String priority) {
-        String sql = "INSERT INTO priority (level) " +
+        String sql = "INSERT OR IGNORE INTO priority (level) " +
                 "VALUES (?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -460,7 +460,7 @@ public class CreateDatabase {
     }
 
     public static void insertLocation(String location) {
-        String sql = "INSERT INTO location (location_name) " +
+        String sql = "INSERT OR IGNORE INTO location (location_name) " +
                 "VALUES(?) ";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
