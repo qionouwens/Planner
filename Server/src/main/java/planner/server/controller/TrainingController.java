@@ -31,8 +31,13 @@ public class TrainingController {
         TrainingDBController.addStreef(streef);
     }
 
-    @PutMapping("")
+    @PutMapping("/streef")
     public void updateStreef(@RequestBody Streef streef) {
         TrainingDBController.updateStreef(streef);
+    }
+
+    @PutMapping("")
+    public void updateTraining(@RequestBody Training training) {
+        TrainingDBController.updateTraining(training);
     }
 }

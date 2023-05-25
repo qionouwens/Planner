@@ -3,15 +3,25 @@ package planner.commons;
 import java.util.Objects;
 
 public class TrainingPart {
+    private int id;
     private int distance;
     private String time;
 
     public TrainingPart() {
     }
 
-    public TrainingPart(int distance, String time) {
+    public TrainingPart(int id, int distance, String time) {
+        this.id = id;
         this.distance = distance;
         this.time = time;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getDistance() {
@@ -35,18 +45,19 @@ public class TrainingPart {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TrainingPart that = (TrainingPart) o;
-        return distance == that.distance && Objects.equals(time, that.time);
+        return id == that.id && distance == that.distance && Objects.equals(time, that.time);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(distance, time);
+        return Objects.hash(id, distance, time);
     }
 
     @Override
     public String toString() {
         return "TrainingPart{" +
-                "distance=" + distance +
+                "id=" + id +
+                ", distance=" + distance +
                 ", time='" + time + '\'' +
                 '}';
     }

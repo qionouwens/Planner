@@ -98,6 +98,41 @@ public class TrainingDBController {
         }
     }
 
+    public static void updateTraining(Training training) {
+        String sql = "UPDATE training " +
+                "SET training_type = ?, " +
+                "   description = ? " +
+                "WHERE training_id = ? ";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, training.getTrainingType());
+            stmt.setString(2, training.getDescription());
+            stmt.setInt(3, training.getId());
+            stmt.execute();
+            for (TrainingPart trainingPart : training.getTrainingParts()) {
+                updateTrainingPart(trainingPart);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void updateTrainingPart(TrainingPart trainingPart) {
+        String sql = "UPDATE trainingPart " +
+                "SET distance = ?, " +
+                "time_spent = ? " +
+                "WHERE training_part_id = ? ";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, trainingPart.getDistance());
+            stmt.setString(2, trainingPart.getTime());
+            stmt.setInt(3, trainingPart.getId());
+            stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private static void addTrainingParts(int trainingId, TrainingPart trainingPart) {
         String sql = "INSERT INTO trainingPart (training_id, distance, time_spent) " +
                 "VALUES (?, ?, ?) ";
@@ -128,7 +163,7 @@ public class TrainingDBController {
     }
 
     private static List<TrainingPart> getTrainingParts(int id) {
-        String sql = "SELECT distance, time_spent " +
+        String sql = "SELECT training_part_id, distance, time_spent " +
                 "FROM trainingPart " +
                 "WHERE training_id = ? ";
         try {
@@ -146,9 +181,10 @@ public class TrainingDBController {
     }
 
     private static TrainingPart getTrainingPart(ResultSet resultSet) throws SQLException {
+        int id = resultSet.getInt("training_part_id");
         int distance = resultSet.getInt("distance");
         String time = resultSet.getString("time_spent");
-        return new TrainingPart(distance, time);
+        return new TrainingPart(id, distance, time);
     }
 
     private static Training getTraining(ResultSet resultSet) throws SQLException {
@@ -160,7 +196,7 @@ public class TrainingDBController {
         GregorianCalendar calendar = DateConversion.getDate(year, month, day);
         int id = resultSet.getInt("training_id");
         List<TrainingPart> trainingParts = getTrainingParts(id);
-        return new Training(type, description, calendar, trainingParts);
+        return new Training(id, type, description, calendar, trainingParts);
     }
 
     public static Streef getStreef(ResultSet resultSet) throws SQLException {
