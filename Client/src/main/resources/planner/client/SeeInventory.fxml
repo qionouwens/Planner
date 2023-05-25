@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.client.SeeInventory">
+   <children>
+      <TableView layoutY="38.0" prefHeight="979.0" prefWidth="1440.0">
+        <columns>
+          <TableColumn prefWidth="480.0" text="Koelkast">
+               <columns>
+                  <TableColumn prefWidth="380.0" text="Description" />
+                <TableColumn prefWidth="100.0" text="Amount" />
+               </columns>
+            </TableColumn>
+            <TableColumn prefWidth="480.0" text="Kastjes">
+               <columns>
+                  <TableColumn prefWidth="380.0" text="Description" />
+                  <TableColumn prefWidth="100.0" text="Amount" />
+               </columns>
+            </TableColumn>
+            <TableColumn prefWidth="480.0" text="Overig">
+               <columns>
+                  <TableColumn prefWidth="380.0" text="Description" />
+                  <TableColumn prefWidth="100.0" text="Amount" />
+               </columns>
+            </TableColumn>
+        </columns>
+      </TableView>
+      <Button layoutX="1409.0" layoutY="7.0" mnemonicParsing="false" text="x" />
+      <Button layoutX="14.0" layoutY="7.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="223.0" text="Add Inventory Item" />
+   </children>
+</AnchorPane>
