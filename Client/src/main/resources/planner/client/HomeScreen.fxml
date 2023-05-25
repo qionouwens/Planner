@@ -235,17 +235,50 @@
       </AnchorPane>
       <AnchorPane layoutX="1080.0" layoutY="512.0" prefHeight="512.0" prefWidth="360.0">
          <children>
-            <Button layoutX="23.0" layoutY="15.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" text="Today" />
-            <Button layoutX="23.0" layoutY="315.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" text="Within 6 Months" />
-            <Button layoutX="23.0" layoutY="255.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" text="Within 3 Months" />
-            <Button layoutX="23.0" layoutY="195.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" text="This Month" />
-            <Button layoutX="23.0" layoutY="135.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" text="This Week" />
-            <Button layoutX="23.0" layoutY="75.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" text="Within 3 days" />
-            <Button layoutX="23.0" layoutY="435.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" text="Ever" />
-            <Button layoutX="23.0" layoutY="375.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" text="This Year" />
+            <Button layoutX="23.0" layoutY="15.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: red;" text="Today" />
+            <Button layoutX="23.0" layoutY="315.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: #C6FF00;" text="Within 6 Months" />
+            <Button layoutX="23.0" layoutY="255.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: F2FF00;" text="Within 3 Months" />
+            <Button layoutX="23.0" layoutY="195.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: #FFFF00;" text="This Month" />
+            <Button layoutX="23.0" layoutY="135.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: #FF9A00;" text="This Week" />
+            <Button layoutX="23.0" layoutY="75.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: #FF6900;" text="Within 3 days" />
+            <Button layoutX="23.0" layoutY="435.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: #00FF00;" text="Ever" />
+            <Button layoutX="23.0" layoutY="375.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: #83FF00;" text="This Year" />
             <Button layoutX="168.0" layoutY="486.0" mnemonicParsing="false" text="+" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutY="512.0" prefHeight="512.0" prefWidth="360.0" />
+      <AnchorPane layoutY="512.0" prefHeight="512.0" prefWidth="360.0" style="-fx-border-color: black;">
+         <children>
+            <Label layoutX="136.0" layoutY="14.0" text="Groceries">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutY="44.0" prefHeight="221.0" prefWidth="359.0" style="-fx-border-color: black;">
+               <children>
+                  <ScrollPane hbarPolicy="NEVER" prefHeight="221.0" prefWidth="358.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                    </content>
+                  </ScrollPane>
+                  <Button layoutX="312.0" layoutY="183.0" mnemonicParsing="false" text="+" />
+               </children>
+            </AnchorPane>
+            <Label layoutX="149.0" layoutY="265.0" text="Overig">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutY="298.0" prefHeight="181.0" prefWidth="359.0" style="-fx-border-color: black;">
+               <children>
+                  <ScrollPane hbarPolicy="NEVER" prefHeight="181.0" prefWidth="358.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="200.0" />
+                    </content>
+                  </ScrollPane>
+                  <Button layoutX="312.0" layoutY="142.0" mnemonicParsing="false" text="+" />
+               </children>
+            </AnchorPane>
+            <Button layoutX="43.0" layoutY="483.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="277.0" text="See Inventory" />
+         </children></AnchorPane>
    </children>
 </AnchorPane>
