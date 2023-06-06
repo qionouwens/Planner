@@ -1,9 +1,6 @@
 package planner.commons.helper;
 
-import planner.commons.CalendarItem;
-import planner.commons.Statement;
-import planner.commons.StatementCategory;
-import planner.commons.UpdateDay;
+import planner.commons.*;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -11,24 +8,22 @@ import java.util.List;
 
 public class JSONConverter {
     public static String convertCalendar(CalendarItem calendarItem) {
-        String result = "{\"id\":" + calendarItem.getId() +
+        return "{\"id\":" + calendarItem.getId() +
                 ",\"title\":\"" + calendarItem.getTitle() + "\"" +
                 ",\"date\":\"" + convertDate(calendarItem.getDate()) + "\"" +
                 ",\"startTime\":\"" + calendarItem.getStartTime() + "\"" +
                 ",\"endTime\":\"" + calendarItem.getEndTime() + "\"" +
                 ",\"colour\":\"" + calendarItem.getColour() + "\"" +
                 ",\"todoList\":null}";
-        return result;
     }
 
     public static String convertStatement(Statement statement) {
         String isIncome = statement.isIncome() ? "true" : "false";
-        String result = "{\"id\":" + statement.getId() + "," +
+        return "{\"id\":" + statement.getId() + "," +
                 "\"amount\":" + statement.getAmount() + "," +
                 "\"category\":\"" + statement.getCategory() + "\"," +
                 "\"date\":\"" + convertDate(statement.getDate()) + "\"," +
                 "\"income\":" + isIncome + "}";
-        return result;
     }
 
     public static String convertStatementCategory(StatementCategory statementCategory) {
@@ -40,6 +35,14 @@ public class JSONConverter {
     public static String convertUpdateDay(UpdateDay updateDay) {
         return "{\"calendar\":\"" + convertDate(updateDay.getCalendar()) + "\"" +
                 ",\"categoryMap\":" + convertList(updateDay.getCategoryMap()) + "}";
+    }
+
+    public static String convertGroceryItem(GroceryItem groceryItem) {
+        return "{\"id\":" + groceryItem.getId() +
+                ",\"item\":\"" + groceryItem.getItem() + "\"" +
+                ",\"quantity\":" + groceryItem.getQuantity() +
+                ",\"priority\":\"" + groceryItem.getPriority() + "\"" +
+                ",\"type\":\"" + groceryItem.getType() + "\"}";
     }
 
     static String convertDate(GregorianCalendar calendar) {

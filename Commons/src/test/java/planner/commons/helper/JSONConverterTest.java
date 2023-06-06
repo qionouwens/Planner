@@ -2,6 +2,7 @@ package planner.commons.helper;
 
 import org.junit.jupiter.api.Test;
 import planner.commons.CalendarItem;
+import planner.commons.GroceryItem;
 
 import java.util.GregorianCalendar;
 
@@ -22,5 +23,12 @@ class JSONConverterTest {
         String result = "2023-05-01T00:00:00.000+00:00";
         GregorianCalendar calendar = DateConversion.getDate(2023, 5, 1);
         assertEquals(result, JSONConverter.convertDate(calendar));
+    }
+
+    @Test
+    void convertGroceryItem() {
+        String result = "{\"id\":1,\"item\":\"Chip\",\"quantity\":1,\"priority\":\"High\",\"type\":\"Grocery\"}";
+        GroceryItem groceryItem = new GroceryItem(1, "Chip", 1, "High", "Grocery");
+        assertEquals(result, JSONConverter.convertGroceryItem(groceryItem));
     }
 }
