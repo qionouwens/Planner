@@ -9,13 +9,17 @@ import java.util.List;
 
 public class JSONConverter {
     public static String convertCalendar(CalendarItem calendarItem) {
+        List<String> todos = new ArrayList<>();
+        for (Todo todo : calendarItem.getTodoList()) {
+            todos.add(convertTodo(todo));
+        }
         return "{\"id\":" + calendarItem.getId() +
                 ",\"title\":\"" + calendarItem.getTitle() + "\"" +
                 ",\"date\":\"" + convertDate(calendarItem.getDate()) + "\"" +
                 ",\"startTime\":\"" + calendarItem.getStartTime() + "\"" +
                 ",\"endTime\":\"" + calendarItem.getEndTime() + "\"" +
                 ",\"colour\":\"" + calendarItem.getColour() + "\"" +
-                ",\"todoList\":null}";
+                ",\"todoList\":" + convertList(todos) + "}";
     }
 
     public static String convertStatement(Statement statement) {
