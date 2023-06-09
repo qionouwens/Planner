@@ -406,4 +406,8 @@ public class HomeScreenCtrl {
     public void addTodo() {
         mainUICtrl.addTodo();
     }
+
+    public void seeTrainingOverview() {
+        mainUICtrl.seeTrainingOverview();
+    }
 }

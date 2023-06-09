@@ -1,15 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="841.0" prefWidth="1223.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.client.TrainingOverview">
+<AnchorPane prefHeight="841.0" prefWidth="1223.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.client.sceneControllers.TrainingOverviewCtrl">
    <children>
-      <AnchorPane layoutX="20.0" layoutY="19.0" prefHeight="739.0" prefWidth="664.0" style="-fx-border-color: black;" />
-      <AnchorPane layoutX="720.0" layoutY="19.0" prefHeight="739.0" prefWidth="473.0" style="-fx-border-color: black;" />
-      <Button layoutX="1194.0" layoutY="3.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="27.0" text="x" />
-      <Button layoutX="325.0" layoutY="764.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 20px;" text="+" />
-      <Button layoutX="940.0" layoutY="764.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 20px;" text="+" />
+      <AnchorPane layoutX="20.0" layoutY="19.0" prefHeight="813.0" prefWidth="664.0" style="-fx-border-color: black;">
+         <children>
+            <ScrollPane layoutX="1.0" layoutY="59.0" prefHeight="756.0" prefWidth="664.0">
+              <content>
+                <AnchorPane fx:id="training" minHeight="0.0" minWidth="0.0" prefHeight="184.0" prefWidth="659.0" />
+              </content>
+            </ScrollPane>
+            <Button layoutX="600.0" layoutY="750.0" mnemonicParsing="false" onAction="#addTraining" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 60px;" text="+" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="60.0" prefWidth="338.0" style="-fx-border-color: black;" text="Type Training">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="337.0" prefHeight="60.0" prefWidth="329.0" style="-fx-border-color: black;" text="Beschrijving">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+      <AnchorPane layoutX="708.0" layoutY="19.0" prefHeight="813.0" prefWidth="473.0" style="-fx-border-color: black;">
+         <children>
+            <ScrollPane layoutX="1.0" layoutY="47.0" prefHeight="769.0" prefWidth="473.0">
+              <content>
+                <AnchorPane fx:id="streef" minHeight="0.0" minWidth="0.0" prefHeight="48.0" prefWidth="469.0" />
+              </content>
+            </ScrollPane>
+            <Button layoutX="413.0" layoutY="753.0" mnemonicParsing="false" onAction="#addStreef" prefHeight="55.0" prefWidth="55.0" style="-fx-background-radius: 60px;" text="+" />
+            <Label alignment="CENTER" layoutX="2.0" layoutY="-2.0" prefHeight="48.0" prefWidth="473.0" text="Streef">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+      <Button layoutX="1194.0" layoutY="3.0" mnemonicParsing="false" onAction="#close" prefHeight="23.0" prefWidth="27.0" text="x" />
    </children>
 </AnchorPane>

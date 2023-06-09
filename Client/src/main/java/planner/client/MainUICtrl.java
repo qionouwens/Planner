@@ -120,6 +120,13 @@ public class MainUICtrl {
         seeTodoCtrl.initialise(this, todos);
     }
 
+    public void seeTrainingOverview() {
+        String seeTrainingOverview = "TrainingOverview.fxml";
+        showStage(seeTrainingOverview, 1223, 841);
+        TrainingOverviewCtrl trainingOverviewCtrl = TrainingOverviewCtrl.getInstance();
+        trainingOverviewCtrl.initialise(this);
+    }
+
     public void showStage(String fxmlScene, int width, int height) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxmlScene));
