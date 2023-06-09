@@ -107,6 +107,10 @@ public class HomeScreenCtrl {
     private AnchorPane groceries;
     @FXML
     private AnchorPane miscGroceries;
+    @FXML
+    private Label weight;
+    @FXML
+    private Label sleep;
     private List<Todo> todayList;
     private List<Todo> daysList;
     private List<Todo> weekList;
@@ -386,6 +390,9 @@ public class HomeScreenCtrl {
         int[] dates = DateConversion.getDateArray(today);
         UpdateDay updateDay = updateServerUtils.getUpdateDay(dates[0], dates[1], dates[2]);
         progress.setProgress((double) updateDay.getCategoryMap().size() / categories.size());
+        int weightValue = ValueServerUtils.getLatestWeight();
+        weight.setText((weightValue/10) + "." + (weightValue%10) + "kg");
+        sleep.setText(ValueServerUtils.getLatestSleep());
     }
 
     public void changeTask() {

@@ -220,7 +220,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="steps" layoutX="138.0" layoutY="79.0" text="1866">
+            <Label fx:id="sleep" layoutX="138.0" layoutY="79.0" text="1866">
                <font>
                   <Font size="14.0" />
                </font>
