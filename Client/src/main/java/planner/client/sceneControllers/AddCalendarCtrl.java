@@ -10,6 +10,7 @@ import planner.commons.CalendarItem;
 import planner.commons.helper.DateConversion;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class AddCalendarCtrl {
@@ -44,7 +45,7 @@ public class AddCalendarCtrl {
         GregorianCalendar calendar = DateConversion.getDateFromString(date.getText());
         String colour = colorPicker.getValue().toString();
         colour = colour.replace("0x", "#").substring(0, 7);
-        CalendarItem calendarItem = new CalendarItem(0, title.getText(), calendar, startTime.getText(), endTime.getText(), colour, null);
+        CalendarItem calendarItem = new CalendarItem(0, title.getText(), calendar, startTime.getText(), endTime.getText(), colour, new ArrayList<>());
         CalendarServerUtils calendarServerUtils = new CalendarServerUtils();
         calendarServerUtils.addCalendar(calendarItem);
         try {
