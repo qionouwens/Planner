@@ -62,6 +62,6 @@ public class TrainingOverviewCtrl {
     }
 
     public void addStreef() {
-
+        mainUICtrl.addStreef();
     }
 }

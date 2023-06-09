@@ -127,6 +127,13 @@ public class MainUICtrl {
         trainingOverviewCtrl.initialise(this);
     }
 
+    public void addStreef() {
+        String addStreef = "AddStreef.fxml";
+        showStage(addStreef, 225, 252);
+        AddStreefCtrl addStreefCtrl = AddStreefCtrl.getInstance();
+        addStreefCtrl.initialise(this);
+    }
+
     public void showStage(String fxmlScene, int width, int height) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxmlScene));

@@ -6,22 +6,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="252.0" prefWidth="225.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.client.AddStreef">
+<AnchorPane prefHeight="252.0" prefWidth="225.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.client.sceneControllers.AddStreefCtrl">
    <children>
       <Label layoutX="17.0" layoutY="26.0" text="Training">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <TextField layoutX="14.0" layoutY="71.0" prefHeight="25.0" prefWidth="193.0" />
+      <TextField fx:id="training" layoutX="14.0" layoutY="71.0" prefHeight="25.0" prefWidth="193.0" />
       <Label layoutX="17.0" layoutY="109.0" text="Streef">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <TextField layoutX="14.0" layoutY="154.0" prefHeight="25.0" prefWidth="193.0" />
-      <Button layoutX="17.0" layoutY="200.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="193.0" text="Save" />
-      <Button layoutX="191.0" layoutY="13.0" mnemonicParsing="false" text="x" />
+      <TextField fx:id="streef" layoutX="14.0" layoutY="154.0" prefHeight="25.0" prefWidth="193.0" />
+      <Button layoutX="17.0" layoutY="200.0" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="193.0" text="Save" />
+      <Button layoutX="191.0" layoutY="13.0" mnemonicParsing="false" onAction="#close" text="x" />
    </children>
 </AnchorPane>
