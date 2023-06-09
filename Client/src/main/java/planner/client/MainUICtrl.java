@@ -6,10 +6,12 @@ import javafx.stage.Stage;
 import planner.client.sceneControllers.*;
 import planner.commons.CalendarItem;
 import planner.commons.Statement;
+import planner.commons.Todo;
 import planner.commons.helper.DateConversion;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class MainUICtrl {
     private final Stage stage;
@@ -109,6 +111,13 @@ public class MainUICtrl {
         showStage(addValue, 280, 110);
         AddValueCtrl addValueCtrl = AddValueCtrl.getInstance();
         addValueCtrl.initialise(this, type);
+    }
+
+    public void seeTodo(List<Todo> todos) {
+        String seeTodo = "SeeTodo.fxml";
+        showStage(seeTodo, 413, 604);
+        SeeTodoCtrl seeTodoCtrl = SeeTodoCtrl.getInstance();
+        seeTodoCtrl.initialise(this, todos);
     }
 
     public void showStage(String fxmlScene, int width, int height) {

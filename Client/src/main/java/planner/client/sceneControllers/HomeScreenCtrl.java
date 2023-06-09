@@ -11,16 +11,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import planner.client.MainUICtrl;
-import planner.client.serverUtils.BudgetServerUtils;
-import planner.client.serverUtils.CalendarServerUtils;
-import planner.client.serverUtils.CleaningServerUtils;
-import planner.client.serverUtils.UpdateServerUtils;
+import planner.client.serverUtils.*;
 import planner.client.views.CalendarItemView;
 import planner.client.views.DailyScheduleView;
-import planner.commons.CalendarItem;
-import planner.commons.CleaningTask;
-import planner.commons.ResultCategory;
-import planner.commons.UpdateDay;
+import planner.commons.*;
 import planner.commons.helper.DateConversion;
 
 import java.time.LocalDateTime;
@@ -78,6 +72,47 @@ public class HomeScreenCtrl {
     private Button weightButton;
     @FXML
     private Button sleepButton;
+    @FXML
+    private Label todayLabel;
+    @FXML
+    private Label days;
+    @FXML
+    private Label week;
+    @FXML
+    private Label month;
+    @FXML
+    private Label quarter;
+    @FXML
+    private Label halfYear;
+    @FXML
+    private Label year;
+    @FXML
+    private Label ever;
+    @FXML
+    private Button todayButton;
+    @FXML
+    private Button daysButton;
+    @FXML
+    private Button weekButton;
+    @FXML
+    private Button monthButton;
+    @FXML
+    private Button quarterButton;
+    @FXML
+    private Button halfYearButton;
+    @FXML
+    private Button yearButton;
+    @FXML
+    private Button everButton;
+    private List<Todo> todayList;
+    private List<Todo> daysList;
+    private List<Todo> weekList;
+    private List<Todo> monthList;
+    private List<Todo> quarterList;
+    private List<Todo> halfYearList;
+    private List<Todo> yearList;
+    private List<Todo> everList;
+
     private List<CleaningTask> cleaningTasks;
     private static HomeScreenCtrl INSTANCE;
     private MainUICtrl mainUICtrl;
@@ -97,6 +132,7 @@ public class HomeScreenCtrl {
         cleaningTasks = cleaningServerUtils.getTasks();
         initialiseTable();
         initialiseButtons();
+        initialiseTodoList();
         setTable();
         setWeek();
         setHours();
@@ -104,7 +140,6 @@ public class HomeScreenCtrl {
         setDailySchedule();
         setCleaningGrid();
         setDailyScreen();
-
     }
 
     public void initialiseButtons() {
@@ -112,6 +147,81 @@ public class HomeScreenCtrl {
         miscButton.setOnAction(actionEvent -> mainUICtrl.addGrocery("Misc"));
         weightButton.setOnAction(actionEvent -> mainUICtrl.addValue("weight"));
         sleepButton.setOnAction(actionEvent -> mainUICtrl.addValue("sleep"));
+        todayButton.setOnAction(actionEvent -> showTodo("today"));
+        daysButton.setOnAction(actionEvent -> showTodo("days"));
+        weekButton.setOnAction(actionEvent -> showTodo("week"));
+        monthButton.setOnAction(actionEvent -> showTodo("month"));
+        quarterButton.setOnAction(actionEvent -> showTodo("quarter"));
+        halfYearButton.setOnAction(actionEvent -> showTodo("halfYear"));
+        yearButton.setOnAction(actionEvent -> showTodo("year"));
+        everButton.setOnAction(actionEvent -> showTodo("ever"));
+    }
+
+    public void initialiseTodoList() {
+        GregorianCalendar todayClone = DateConversion.getGregorianCalendarClone(today);
+        GregorianCalendar daysClone = DateConversion.getGregorianCalendarClone(today);
+        daysClone.add(Calendar.DAY_OF_MONTH, 3);
+        GregorianCalendar weeksClone = DateConversion.getGregorianCalendarClone(today);
+        daysClone.add(Calendar.DAY_OF_MONTH, 7);
+        GregorianCalendar monthClone = DateConversion.getGregorianCalendarClone(today);
+        daysClone.add(Calendar.MONTH, 1);
+        GregorianCalendar quarterClone = DateConversion.getGregorianCalendarClone(today);
+        daysClone.add(Calendar.MONTH, 3);
+        GregorianCalendar halfYearClone = DateConversion.getGregorianCalendarClone(today);
+        daysClone.add(Calendar.MONTH, 6);
+        GregorianCalendar yearClone = DateConversion.getGregorianCalendarClone(today);
+        daysClone.add(Calendar.YEAR, 1);
+        todayList = new ArrayList<>();
+        daysList = new ArrayList<>();
+        weekList = new ArrayList<>();
+        monthList = new ArrayList<>();
+        quarterList = new ArrayList<>();
+        halfYearList = new ArrayList<>();
+        yearList = new ArrayList<>();
+        everList = new ArrayList<>();
+        List<Todo> todoList = TodoServerUtils.getTodos();
+        for (Todo todo : todoList) {
+            if (todo.getDate().compareTo(todayClone) < 0) {
+                everList.add(todo);
+            } else if (todo.getDate().compareTo(todayClone) == 0) {
+                todayList.add(todo);
+            } else if (todo.getDate().compareTo(daysClone) <= 0) {
+                daysList.add(todo);
+            } else if (todo.getDate().compareTo(weeksClone) <= 0) {
+                weekList.add(todo);
+            } else if (todo.getDate().compareTo(monthClone) <= 0) {
+                monthList.add(todo);
+            } else if (todo.getDate().compareTo(quarterClone) <= 0) {
+                quarterList.add(todo);
+            } else if (todo.getDate().compareTo(halfYearClone) <= 0) {
+                halfYearList.add(todo);
+            } else if (todo.getDate().compareTo(yearClone) <= 0) {
+                yearList.add(todo);
+            } else {
+                everList.add(todo);
+            }
+        }
+        todayLabel.setText(todayList.size() + " task(s)");
+        days.setText(daysList.size() + " task(s)");
+        week.setText(weekList.size() + " task(s)");
+        month.setText(monthList.size() + " task(s)");
+        quarter.setText(quarterList.size() + " task(s)");
+        halfYear.setText(halfYearList.size() + " task(s)");
+        year.setText(yearList.size() + " task(s)");
+        ever.setText(everList.size() + " task(s)");
+    }
+
+    public void showTodo(String button) {
+        switch (button) {
+            case "today" -> mainUICtrl.seeTodo(todayList);
+            case "days" -> mainUICtrl.seeTodo(daysList);
+            case "weeks" -> mainUICtrl.seeTodo(weekList);
+            case "month" -> mainUICtrl.seeTodo(monthList);
+            case "quarter" -> mainUICtrl.seeTodo(quarterList);
+            case "halfYear" -> mainUICtrl.seeTodo(halfYearList);
+            case "year" -> mainUICtrl.seeTodo(yearList);
+            case "ever" -> mainUICtrl.seeTodo(everList);
+        }
     }
 
     public static HomeScreenCtrl getINSTANCE() {

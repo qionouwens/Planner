@@ -235,15 +235,23 @@
       </AnchorPane>
       <AnchorPane layoutX="1080.0" layoutY="512.0" prefHeight="512.0" prefWidth="360.0">
          <children>
-            <Button layoutX="23.0" layoutY="15.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: red;" text="Today" />
-            <Button layoutX="23.0" layoutY="315.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: #C6FF00;" text="Within 6 Months" />
-            <Button layoutX="23.0" layoutY="255.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: F2FF00;" text="Within 3 Months" />
-            <Button layoutX="23.0" layoutY="195.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: #FFFF00;" text="This Month" />
-            <Button layoutX="23.0" layoutY="135.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: #FF9A00;" text="This Week" />
-            <Button layoutX="23.0" layoutY="75.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: #FF6900;" text="Within 3 days" />
-            <Button layoutX="23.0" layoutY="435.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: #00FF00;" text="Ever" />
-            <Button layoutX="23.0" layoutY="375.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: #83FF00;" text="This Year" />
+            <Button fx:id="todayButton" layoutX="23.0" layoutY="15.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: red;" text="Today" />
+            <Button fx:id="halfYearButton" layoutX="23.0" layoutY="315.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: #C6FF00;" text="Within 6 Months" />
+            <Button fx:id="quarterButton" layoutX="23.0" layoutY="255.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: F2FF00;" text="Within 3 Months" />
+            <Button fx:id="monthButton" layoutX="23.0" layoutY="195.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: #FFFF00;" text="This Month" />
+            <Button fx:id="weekButton" layoutX="23.0" layoutY="135.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: #FF9A00;" text="This Week" />
+            <Button fx:id="daysButton" layoutX="23.0" layoutY="75.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: #FF6900;" text="Within 3 days" />
+            <Button fx:id="everButton" layoutX="23.0" layoutY="435.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: #00FF00;" text="Ever" />
+            <Button fx:id="yearButton" layoutX="23.0" layoutY="375.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: #83FF00;" text="This Year" />
             <Button layoutX="168.0" layoutY="486.0" mnemonicParsing="false" onAction="#addTodo" text="+" />
+            <Label fx:id="todayLabel" layoutX="280.0" layoutY="27.0" text="Label" />
+            <Label fx:id="ever" layoutX="280.0" layoutY="447.0" text="Label" />
+            <Label fx:id="year" layoutX="280.0" layoutY="387.0" text="Label" />
+            <Label fx:id="halfYear" layoutX="280.0" layoutY="327.0" text="Label" />
+            <Label fx:id="quarter" layoutX="280.0" layoutY="267.0" text="Label" />
+            <Label fx:id="month" layoutX="280.0" layoutY="207.0" text="Label" />
+            <Label fx:id="week" layoutX="280.0" layoutY="147.0" text="Label" />
+            <Label fx:id="days" layoutX="280.0" layoutY="87.0" text="Label" />
          </children>
       </AnchorPane>
       <AnchorPane layoutY="512.0" prefHeight="512.0" prefWidth="360.0" style="-fx-border-color: black;">

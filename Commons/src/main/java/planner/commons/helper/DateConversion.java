@@ -29,6 +29,11 @@ public class DateConversion {
         return getDate(year, month, day);
     }
 
+    public static GregorianCalendar getGregorianCalendarClone(GregorianCalendar calendar) {
+        int[] dates = getDateArray(calendar);
+        return getDate(dates[0], dates[1], dates[2]);
+    }
+
     public static String getStringFromDate(GregorianCalendar calendar) {
         return calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH) + 1) + "/"
                 + calendar.get(Calendar.YEAR);
