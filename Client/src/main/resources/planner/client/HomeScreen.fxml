@@ -265,7 +265,7 @@
                <children>
                   <ScrollPane hbarPolicy="NEVER" prefHeight="221.0" prefWidth="358.0">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                      <AnchorPane fx:id="groceries" minHeight="0.0" minWidth="0.0" prefHeight="101.0" prefWidth="358.0" />
                     </content>
                   </ScrollPane>
                   <Button fx:id="groceryButton" layoutX="312.0" layoutY="183.0" mnemonicParsing="false" text="+" />
@@ -280,7 +280,7 @@
                <children>
                   <ScrollPane hbarPolicy="NEVER" prefHeight="181.0" prefWidth="358.0">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="200.0" />
+                      <AnchorPane fx:id="miscGroceries" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="200.0" />
                     </content>
                   </ScrollPane>
                   <Button fx:id="miscButton" layoutX="312.0" layoutY="142.0" mnemonicParsing="false" text="+" />

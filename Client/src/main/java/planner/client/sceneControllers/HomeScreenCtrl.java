@@ -14,6 +14,7 @@ import planner.client.MainUICtrl;
 import planner.client.serverUtils.*;
 import planner.client.views.CalendarItemView;
 import planner.client.views.DailyScheduleView;
+import planner.client.views.GroceryView;
 import planner.commons.*;
 import planner.commons.helper.DateConversion;
 
@@ -104,6 +105,10 @@ public class HomeScreenCtrl {
     private Button yearButton;
     @FXML
     private Button everButton;
+    @FXML
+    private AnchorPane groceries;
+    @FXML
+    private AnchorPane miscGroceries;
     private List<Todo> todayList;
     private List<Todo> daysList;
     private List<Todo> weekList;
@@ -140,6 +145,7 @@ public class HomeScreenCtrl {
         setDailySchedule();
         setCleaningGrid();
         setDailyScreen();
+        setUpGroceries();
     }
 
     public void initialiseButtons() {
@@ -305,6 +311,31 @@ public class HomeScreenCtrl {
         addButton.setLayoutY(400);
         addButton.setOnAction(event -> addButton());
         calendarPane.getChildren().add(addButton);
+    }
+
+    public void setUpGroceries() {
+        List<GroceryItem> allItem = GroceryServerUtils.getAll();
+        List<GroceryItem> groceriesList = new ArrayList<>();
+        List<GroceryItem> misc = new ArrayList<>();
+        for (GroceryItem groceryItem: allItem) {
+            if (groceryItem.getType().equals("Grocery")) {
+                groceriesList.add(groceryItem);
+            } else if (groceryItem.getType().equals("Misc")) {
+                misc.add(groceryItem);
+            }
+        }
+        for (int i = 0; i < groceriesList.size(); i++) {
+            GroceryView groceryView = new GroceryView(groceriesList.get(i), mainUICtrl);
+            groceryView.setLayoutX(0);
+            groceryView.setLayoutY(24*i);
+            groceries.getChildren().add(groceryView);
+        }
+        for (int i = 0; i < misc.size(); i++) {
+            GroceryView groceryView = new GroceryView(misc.get(i), mainUICtrl);
+            groceryView.setLayoutX(0);
+            groceryView.setLayoutY(24*i);
+            miscGroceries.getChildren().add(groceryView);
+        }
     }
 
     public void initialiseTable() {
