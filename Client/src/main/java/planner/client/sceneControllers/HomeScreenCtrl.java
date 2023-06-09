@@ -29,8 +29,6 @@ public class HomeScreenCtrl {
         }
     }
 
-    private ObservableList<ResultCategory> categories;
-
     @FXML
     private Label monday;
     @FXML
@@ -350,7 +348,7 @@ public class HomeScreenCtrl {
         BudgetServerUtils budgetServerUtils = new BudgetServerUtils();
         LocalDateTime now = LocalDateTime.now();
         List<ResultCategory> results = budgetServerUtils.getResultForThisMonth(now.getYear(), now.getMonthValue());
-        categories = FXCollections.observableList(results);
+        ObservableList<ResultCategory> categories = FXCollections.observableList(results);
         table.setItems(categories);
     }
 
