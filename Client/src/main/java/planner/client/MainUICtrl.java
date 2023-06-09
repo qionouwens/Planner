@@ -97,6 +97,13 @@ public class MainUICtrl {
         addGroceryCtrl.initialise(this, type);
     }
 
+    public void addTodo() {
+        String addTodo = "AddTodo.fxml";
+        showStage(addTodo, 320, 252);
+        AddTodoCtrl addTodoCtrl = AddTodoCtrl.getInstance();
+        addTodoCtrl.initialise(this);
+    }
+
     public void showStage(String fxmlScene, int width, int height) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxmlScene));

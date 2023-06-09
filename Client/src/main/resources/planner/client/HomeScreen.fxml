@@ -243,7 +243,7 @@
             <Button layoutX="23.0" layoutY="75.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: #FF6900;" text="Within 3 days" />
             <Button layoutX="23.0" layoutY="435.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: #00FF00;" text="Ever" />
             <Button layoutX="23.0" layoutY="375.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="315.0" style="-fx-background-color: #83FF00;" text="This Year" />
-            <Button layoutX="168.0" layoutY="486.0" mnemonicParsing="false" text="+" />
+            <Button layoutX="168.0" layoutY="486.0" mnemonicParsing="false" onAction="#addTodo" text="+" />
          </children>
       </AnchorPane>
       <AnchorPane layoutY="512.0" prefHeight="512.0" prefWidth="360.0" style="-fx-border-color: black;">

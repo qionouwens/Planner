@@ -285,4 +285,8 @@ public class HomeScreenCtrl {
     public void showUpdateView() {
         mainUICtrl.showUpdateQuestions();
     }
+
+    public void addTodo() {
+        mainUICtrl.addTodo();
+    }
 }
