@@ -74,6 +74,10 @@ public class HomeScreenCtrl {
     private Button groceryButton;
     @FXML
     private Button miscButton;
+    @FXML
+    private Button weightButton;
+    @FXML
+    private Button sleepButton;
     private List<CleaningTask> cleaningTasks;
     private static HomeScreenCtrl INSTANCE;
     private MainUICtrl mainUICtrl;
@@ -92,6 +96,7 @@ public class HomeScreenCtrl {
         CleaningServerUtils cleaningServerUtils = new CleaningServerUtils();
         cleaningTasks = cleaningServerUtils.getTasks();
         initialiseTable();
+        initialiseButtons();
         setTable();
         setWeek();
         setHours();
@@ -99,12 +104,14 @@ public class HomeScreenCtrl {
         setDailySchedule();
         setCleaningGrid();
         setDailyScreen();
-        initialiseGroceryButtons();
+
     }
 
-    public void initialiseGroceryButtons() {
+    public void initialiseButtons() {
         groceryButton.setOnAction(actionEvent -> mainUICtrl.addGrocery("Grocery"));
         miscButton.setOnAction(actionEvent -> mainUICtrl.addGrocery("Misc"));
+        weightButton.setOnAction(actionEvent -> mainUICtrl.addValue("weight"));
+        sleepButton.setOnAction(actionEvent -> mainUICtrl.addValue("sleep"));
     }
 
     public static HomeScreenCtrl getINSTANCE() {

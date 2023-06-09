@@ -210,7 +210,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="71.0" layoutY="79.0" text="Stappen:">
+            <Label layoutX="71.0" layoutY="79.0" text="Sleep:">
                <font>
                   <Font size="14.0" />
                </font>
@@ -225,8 +225,8 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button layoutX="193.0" layoutY="47.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Update" />
-            <Button layoutX="193.0" layoutY="77.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Update" />
+            <Button fx:id="weightButton" layoutX="193.0" layoutY="47.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Update" />
+            <Button fx:id="sleepButton" layoutX="193.0" layoutY="77.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Update" />
             <ProgressIndicator fx:id="progress" layoutX="80.0" layoutY="134.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" progress="0.55" />
             <Button layoutX="129.0" layoutY="350.0" mnemonicParsing="false" onAction="#showUpdateView" prefHeight="25.0" prefWidth="103.0" text="Update" />
             <Button layoutX="35.0" layoutY="440.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="254.0" text="See Training" />

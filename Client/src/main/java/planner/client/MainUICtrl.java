@@ -104,6 +104,13 @@ public class MainUICtrl {
         addTodoCtrl.initialise(this);
     }
 
+    public void addValue(String type) {
+        String addValue = "AddValue.fxml";
+        showStage(addValue, 280, 110);
+        AddValueCtrl addValueCtrl = AddValueCtrl.getInstance();
+        addValueCtrl.initialise(this, type);
+    }
+
     public void showStage(String fxmlScene, int width, int height) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxmlScene));

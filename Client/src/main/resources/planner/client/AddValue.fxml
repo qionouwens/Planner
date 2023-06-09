@@ -4,9 +4,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="110.0" prefWidth="280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.client.AddValue">
+<AnchorPane prefHeight="110.0" prefWidth="280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.client.sceneControllers.AddValueCtrl">
    <children>
       <TextField fx:id="value" layoutX="23.0" layoutY="24.0" prefHeight="25.0" prefWidth="235.0" />
-      <Button layoutX="23.0" layoutY="66.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="235.0" text="Save" />
+      <Button layoutX="23.0" layoutY="66.0" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="235.0" text="Save" />
+      <Button layoutX="258.0" layoutY="-1.0" mnemonicParsing="false" onAction="#close" text="x" />
    </children>
 </AnchorPane>
