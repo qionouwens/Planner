@@ -90,6 +90,13 @@ public class MainUICtrl {
         updateQuestionsCtrl.initialise(this, DateConversion.getDate(now.getYear(), now.getMonthValue(), now.getDayOfMonth()));
     }
 
+    public void addGrocery(String type) {
+        String addGrocery = "AddGrocery.fxml";
+        showStage(addGrocery, 308, 356);
+        AddGroceryCtrl addGroceryCtrl = AddGroceryCtrl.getInstance();
+        addGroceryCtrl.initialise(this, type);
+    }
+
     public void showStage(String fxmlScene, int width, int height) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxmlScene));

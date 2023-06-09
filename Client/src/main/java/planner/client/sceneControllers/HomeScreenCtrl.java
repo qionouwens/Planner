@@ -70,6 +70,10 @@ public class HomeScreenCtrl {
     private GridPane cleaningGrid;
     @FXML
     private ProgressIndicator progress;
+    @FXML
+    private Button groceryButton;
+    @FXML
+    private Button miscButton;
     private List<CleaningTask> cleaningTasks;
     private static HomeScreenCtrl INSTANCE;
     private MainUICtrl mainUICtrl;
@@ -95,6 +99,12 @@ public class HomeScreenCtrl {
         setDailySchedule();
         setCleaningGrid();
         setDailyScreen();
+        initialiseGroceryButtons();
+    }
+
+    public void initialiseGroceryButtons() {
+        groceryButton.setOnAction(actionEvent -> mainUICtrl.addGrocery("Grocery"));
+        miscButton.setOnAction(actionEvent -> mainUICtrl.addGrocery("Misc"));
     }
 
     public static HomeScreenCtrl getINSTANCE() {

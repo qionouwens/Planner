@@ -260,7 +260,7 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
                     </content>
                   </ScrollPane>
-                  <Button layoutX="312.0" layoutY="183.0" mnemonicParsing="false" text="+" />
+                  <Button fx:id="groceryButton" layoutX="312.0" layoutY="183.0" mnemonicParsing="false" text="+" />
                </children>
             </AnchorPane>
             <Label layoutX="149.0" layoutY="265.0" text="Overig">
@@ -275,7 +275,7 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="200.0" />
                     </content>
                   </ScrollPane>
-                  <Button layoutX="312.0" layoutY="142.0" mnemonicParsing="false" text="+" />
+                  <Button fx:id="miscButton" layoutX="312.0" layoutY="142.0" mnemonicParsing="false" text="+" />
                </children>
             </AnchorPane>
             <Button layoutX="43.0" layoutY="483.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="277.0" text="See Inventory" />
