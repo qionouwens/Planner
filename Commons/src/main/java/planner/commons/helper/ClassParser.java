@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class ClassParser {
 
     private final static Pattern integerPattern = Pattern.compile("\"\\w+\":\\d+");
-    private static final Pattern stringPattern = Pattern.compile("\"\\w+\":\"[\\w: #]+\"");
+    private static final Pattern stringPattern = Pattern.compile("\"\\w+\":\"[\\w: #.']+\"");
     private static final Pattern datePattern = Pattern.compile("\"\\w+\":\"\\d{4}-\\d{2}-\\d{2}T00:00:00\\.000\\+00:00\"");
     private static final Pattern listPattern = Pattern.compile("\"\\w+\":\\[.*]");
     private static final Pattern booleanPattern = Pattern.compile("\"\\w+\":(true|false)");
@@ -212,6 +212,55 @@ public class ClassParser {
             inventoryItems.add(getInventoryItem(inventoryString));
         }
         return inventoryItems;
+    }
+
+    public static TrainingPart getTrainingPart(String trainingPartString) {
+        Matcher matcher = integerPattern.matcher(trainingPartString);
+        String id = getMatcherResult(matcher, integerPattern);
+        String distance = getMatcherResult(matcher, integerPattern);
+        String time = getMatcherResult(matcher, stringPattern);
+        return new TrainingPart(getInteger(id), getInteger(distance), getString(time));
+    }
+
+    public static List<TrainingPart> getTrainingPartList(String trainingPartListString) {
+        List<TrainingPart> trainingParts = new ArrayList<>();
+        for (String trainingPartString : getObjectList(trainingPartListString)) {
+            trainingParts.add(getTrainingPart(trainingPartString));
+        }
+        return trainingParts;
+    }
+
+    public static Training getTraining(String trainingString) {
+        Matcher matcher = integerPattern.matcher(trainingString);
+        String id = getMatcherResult(matcher, integerPattern);
+        String type = getMatcherResult(matcher, stringPattern);
+        String description = getMatcherResult(matcher, stringPattern);
+        String date = getMatcherResult(matcher, datePattern);
+        String trainingPart = getMatcherResult(matcher, listPattern);
+        return new Training(getInteger(id), getString(type), getString(description), getDate(date), getTrainingPartList(trainingPart));
+    }
+
+    public static List<Training> getTrainingList(String trainingListString) {
+        List<Training> trainingList = new ArrayList<>();
+        for (String training : getObjectList(trainingListString)) {
+            trainingList.add(getTraining(training));
+        }
+        return trainingList;
+    }
+
+    public static Streef getStreef(String streefString) {
+        Matcher matcher = integerPattern.matcher(streefString);
+        String training = getMatcherResult(matcher, stringPattern);
+        String streef = getMatcherResult(matcher, stringPattern);
+        return new Streef(getString(training), getString(streef));
+    }
+
+    public static List<Streef> getStreefList(String streefListString) {
+        List<Streef> streefList = new ArrayList<>();
+        for (String streef : getObjectList(streefListString)) {
+            streefList.add(getStreef(streef));
+        }
+        return streefList;
     }
 
     static int getInteger(String idString) {

@@ -2,6 +2,7 @@ package planner.commons.helper;
 
 import planner.commons.*;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -34,7 +35,7 @@ public class JSONConverter {
 
     public static String convertUpdateDay(UpdateDay updateDay) {
         return "{\"calendar\":\"" + convertDate(updateDay.getCalendar()) + "\"" +
-                ",\"categoryMap\":" + convertList(updateDay.getCategoryMap()) + "}";
+                ",\"categoryMap\":" + convertStringList(updateDay.getCategoryMap()) + "}";
     }
 
     public static String convertGroceryItem(GroceryItem groceryItem) {
@@ -58,6 +59,29 @@ public class JSONConverter {
                 ",\"date\":\"" + convertDate(todo.getDate()) + "\"}";
     }
 
+    public static String convertTrainingPart(TrainingPart trainingPart) {
+        return "{\"id\":" + trainingPart.getId() +
+                ",\"distance\":" + trainingPart.getDistance() +
+                ",\"time\":\"" + trainingPart.getTime() + "\"}";
+    }
+
+    public static String convertTraining(Training training) {
+        List<String> trainingParts = new ArrayList<>();
+        for (TrainingPart trainingPart : training.getTrainingParts()) {
+            trainingParts.add(convertTrainingPart(trainingPart));
+        }
+        return "{\"id\":" + training.getId() +
+                ",\"trainingType\":\"" + training.getTrainingType() + "\"" +
+                ",\"description\":\"" + training.getDescription() + "\"" +
+                ",\"calendar\":\"" + convertDate(training.getCalendar()) + "\"" +
+                ",\"trainingParts\":" + convertList(trainingParts) + "}";
+    }
+
+    public static String convertStreef(Streef streef) {
+        return "{\"training\":\"" + streef.getTraining() + "\"," +
+                "\"streef\":\"" + streef.getStreef() + "\"}";
+    }
+
     static String convertDate(GregorianCalendar calendar) {
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH) + 1;
@@ -67,7 +91,7 @@ public class JSONConverter {
         return year + "-" + monthString + "-" + dayString + "T00:00:00.000+00:00";
     }
 
-    static String convertList(List<String> stringList) {
+    static String convertStringList(List<String> stringList) {
         if (stringList.size() == 0) {
             return "[]";
         }
@@ -77,6 +101,21 @@ public class JSONConverter {
             stringBuilder.append("\"");
             stringBuilder.append(string);
             stringBuilder.append("\",");
+        }
+        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+        stringBuilder.append("]");
+        return stringBuilder.toString();
+    }
+
+    static String convertList(List<String> stringList) {
+        if (stringList.size() == 0) {
+            return "[]";
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+        for (String string : stringList) {
+            stringBuilder.append(string);
+            stringBuilder.append(",");
         }
         stringBuilder.deleteCharAt(stringBuilder.length()-1);
         stringBuilder.append("]");

@@ -1,12 +1,10 @@
 package planner.commons.helper;
 
 import org.junit.jupiter.api.Test;
-import planner.commons.CalendarItem;
-import planner.commons.GroceryItem;
-import planner.commons.InventoryItem;
-import planner.commons.Todo;
+import planner.commons.*;
 
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -46,5 +44,21 @@ class JSONConverterTest {
         String result = "{\"id\":1,\"description\":\"Hello\",\"date\":\"2023-05-25T00:00:00.000+00:00\"}";
         Todo todo = new Todo(1, "Hello", DateConversion.getDate(2023, 5, 25));
         assertEquals(result, JSONConverter.convertTodo(todo));
+    }
+
+    @Test
+    void convertTraining() {
+        String result = "{\"id\":1,\"trainingType\":\"Ergo\",\"description\":\"2x1000\",\"calendar\":\"2023-06-05T00:00:00.000+00:00\",\"trainingParts\":[{\"id\":1,\"distance\":1000,\"time\":\"3:49.4\"},{\"id\":2,\"distance\":1000,\"time\":\"3:49.5\"}]}";
+        TrainingPart trainingPart = new TrainingPart(1, 1000, "3:49.4");
+        TrainingPart trainingPart1 = new TrainingPart(2, 1000, "3:49.5");
+        Training training = new Training(1, "Ergo", "2x1000", DateConversion.getDate(2023, 6, 5), List.of(trainingPart, trainingPart1));
+        assertEquals(result, JSONConverter.convertTraining(training));
+    }
+
+    @Test
+    void convertStreef() {
+        String result = "{\"training\":\"3x15 ED\",\"streef\":\"2:10\"}";
+        Streef streef = new Streef("3x15 ED", "2:10");
+        assertEquals(result, JSONConverter.convertStreef(streef));
     }
 }

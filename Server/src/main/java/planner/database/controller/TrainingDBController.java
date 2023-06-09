@@ -40,7 +40,7 @@ public class TrainingDBController {
                 "FROM streef";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            ResultSet resultSet = stmt.getResultSet();
+            ResultSet resultSet = stmt.executeQuery();
             List<Streef> result = new ArrayList<>();
             while (resultSet.next()) {
                 result.add(getStreef(resultSet));
@@ -64,7 +64,9 @@ public class TrainingDBController {
             stmt.setInt(3, date_id);
             stmt.execute();
             int training_id = getTrainingId(training, date_id);
-            for (TrainingPart trainingPart : training.getTrainingParts()) {
+            for (int i = 0; i < training.getTrainingParts().size(); i++) {
+                TrainingPart trainingPart = training.getTrainingParts().get(i);
+                trainingPart.setId(i + 1);
                 addTrainingParts(training_id, trainingPart);
             }
         } catch (SQLException e) {
@@ -109,24 +111,27 @@ public class TrainingDBController {
             stmt.setString(2, training.getDescription());
             stmt.setInt(3, training.getId());
             stmt.execute();
-            for (TrainingPart trainingPart : training.getTrainingParts()) {
-                updateTrainingPart(trainingPart);
+            for (int i = 0; i < training.getTrainingParts().size(); i++) {
+                TrainingPart trainingPart = training.getTrainingParts().get(i);
+                trainingPart.setId(i + 1);
+                updateTrainingPart(trainingPart, training.getId());
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static void updateTrainingPart(TrainingPart trainingPart) {
+    public static void updateTrainingPart(TrainingPart trainingPart, int trainingId) {
         String sql = "UPDATE trainingPart " +
                 "SET distance = ?, " +
                 "time_spent = ? " +
-                "WHERE training_part_id = ? ";
+                "WHERE training_part_id = ? AND training_id = ? ";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, trainingPart.getDistance());
             stmt.setString(2, trainingPart.getTime());
             stmt.setInt(3, trainingPart.getId());
+            stmt.setInt(4, trainingId);
             stmt.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -134,13 +139,15 @@ public class TrainingDBController {
     }
 
     private static void addTrainingParts(int trainingId, TrainingPart trainingPart) {
-        String sql = "INSERT INTO trainingPart (training_id, distance, time_spent) " +
-                "VALUES (?, ?, ?) ";
+        String sql = "INSERT INTO trainingPart (training_part_id, training_id, distance, time_spent) " +
+                "VALUES (?, ?, ?, ?) ";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, trainingId);
-            stmt.setInt(2, trainingPart.getDistance());
-            stmt.setString(3, trainingPart.getTime());
+            stmt.setInt(1, trainingPart.getId());
+            stmt.setInt(2, trainingId);
+            stmt.setInt(3, trainingPart.getDistance());
+            stmt.setString(4, trainingPart.getTime());
+            stmt.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
