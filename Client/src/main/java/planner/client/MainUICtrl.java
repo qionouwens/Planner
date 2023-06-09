@@ -7,6 +7,7 @@ import planner.client.sceneControllers.*;
 import planner.commons.CalendarItem;
 import planner.commons.Statement;
 import planner.commons.Todo;
+import planner.commons.Training;
 import planner.commons.helper.DateConversion;
 
 import java.io.IOException;
@@ -132,6 +133,13 @@ public class MainUICtrl {
         showStage(addStreef, 225, 252);
         AddStreefCtrl addStreefCtrl = AddStreefCtrl.getInstance();
         addStreefCtrl.initialise(this);
+    }
+
+    public void seeTraining(Training training) {
+        String seeTraining = "SeeTraining.fxml";
+        showStage(seeTraining, 251, 347);
+        SeeTrainingCtrl seeTrainingCtrl = SeeTrainingCtrl.getInstance();
+        seeTrainingCtrl.initialise(this, training);
     }
 
     public void showStage(String fxmlScene, int width, int height) {

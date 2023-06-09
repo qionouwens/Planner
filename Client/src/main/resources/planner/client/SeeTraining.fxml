@@ -8,27 +8,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="347.0" prefWidth="251.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.client.AddStreef">
+<AnchorPane prefHeight="347.0" prefWidth="251.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planner.client.sceneControllers.SeeTrainingCtrl">
    <children>
       <Label layoutX="18.0" layoutY="14.0" text="Training">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <TextField layoutX="15.0" layoutY="59.0" prefHeight="25.0" prefWidth="219.0" />
+      <TextField fx:id="training" editable="false" layoutX="15.0" layoutY="59.0" prefHeight="25.0" prefWidth="219.0" />
       <Label layoutX="18.0" layoutY="97.0" text="Beschrijving">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <TextField layoutX="15.0" layoutY="142.0" prefHeight="25.0" prefWidth="219.0" />
+      <TextField fx:id="description" editable="false" layoutX="15.0" layoutY="142.0" prefHeight="25.0" prefWidth="219.0" />
       <Button layoutX="15.0" layoutY="308.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="219.0" text="Edit" />
-      <Button layoutX="224.0" layoutY="8.0" mnemonicParsing="false" text="x" />
-      <TableView layoutX="14.0" layoutY="182.0" prefHeight="111.0" prefWidth="219.0">
+      <Button layoutX="224.0" layoutY="8.0" mnemonicParsing="false" onAction="#close" text="x" />
+      <TableView fx:id="trainingParts" layoutX="15.0" layoutY="187.0" prefHeight="111.0" prefWidth="219.0">
         <columns>
-          <TableColumn prefWidth="70.0" text="Tijd" />
-          <TableColumn minWidth="0.0" prefWidth="75.0" text="Afstand" />
-            <TableColumn text="Split" />
+          <TableColumn fx:id="time" prefWidth="109.0" text="Tijd" />
+          <TableColumn fx:id="distance" minWidth="0.0" prefWidth="109.0" text="Afstand" />
         </columns>
       </TableView>
    </children>

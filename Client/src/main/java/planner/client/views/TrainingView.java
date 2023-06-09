@@ -19,6 +19,7 @@ public class TrainingView extends AnchorPane {
 
     public void createView() {
         this.setPrefSize(662, 60);
+        this.setOnMouseClicked(mouseEvent -> mainUICtrl.seeTraining(training));
 
         Label type = new Label(training.getTrainingType());
         type.setPrefSize(338, 60);
