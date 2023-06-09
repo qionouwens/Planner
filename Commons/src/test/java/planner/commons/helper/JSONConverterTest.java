@@ -3,6 +3,8 @@ package planner.commons.helper;
 import org.junit.jupiter.api.Test;
 import planner.commons.CalendarItem;
 import planner.commons.GroceryItem;
+import planner.commons.InventoryItem;
+import planner.commons.Todo;
 
 import java.util.GregorianCalendar;
 
@@ -30,5 +32,19 @@ class JSONConverterTest {
         String result = "{\"id\":1,\"item\":\"Chip\",\"quantity\":1,\"priority\":\"High\",\"type\":\"Grocery\"}";
         GroceryItem groceryItem = new GroceryItem(1, "Chip", 1, "High", "Grocery");
         assertEquals(result, JSONConverter.convertGroceryItem(groceryItem));
+    }
+
+    @Test
+    void convertInventoryItem() {
+        String result = "{\"id\":1,\"item\":\"cup\",\"quantity\":1,\"location\":\"Fridge\"}";
+        InventoryItem inventoryItem = new InventoryItem(1, "cup", 1, "Fridge");
+        assertEquals(result, JSONConverter.convertInventoryItem(inventoryItem));
+    }
+
+    @Test
+    void convertTodo() {
+        String result = "{\"id\":1,\"description\":\"Hello\",\"date\":\"2023-05-25T00:00:00.000+00:00\"}";
+        Todo todo = new Todo(1, "Hello", DateConversion.getDate(2023, 5, 25));
+        assertEquals(result, JSONConverter.convertTodo(todo));
     }
 }

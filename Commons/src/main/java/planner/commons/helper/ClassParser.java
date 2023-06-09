@@ -197,6 +197,23 @@ public class ClassParser {
         return groceryItems;
     }
 
+    public static InventoryItem getInventoryItem(String inventoryItemString) {
+        Matcher matcher = integerPattern.matcher(inventoryItemString);
+        String id = getMatcherResult(matcher, integerPattern);
+        String item = getMatcherResult(matcher, stringPattern);
+        String quantity = getMatcherResult(matcher, integerPattern);
+        String location = getMatcherResult(matcher, stringPattern);
+        return new InventoryItem(getInteger(id), getString(item), getInteger(quantity), getString(location));
+    }
+
+    public static List<InventoryItem> getInventoryItemList(String inventoryItemListString) {
+        List<InventoryItem> inventoryItems = new ArrayList<>();
+        for (String inventoryString : getObjectList(inventoryItemListString)) {
+            inventoryItems.add(getInventoryItem(inventoryString));
+        }
+        return inventoryItems;
+    }
+
     static int getInteger(String idString) {
         Scanner scanner = new Scanner(idString);
         scanner.useDelimiter(":");

@@ -45,6 +45,19 @@ public class JSONConverter {
                 ",\"type\":\"" + groceryItem.getType() + "\"}";
     }
 
+    public static String convertInventoryItem(InventoryItem inventoryItem) {
+        return "{\"id\":" + inventoryItem.getId() +
+                ",\"item\":\"" + inventoryItem.getItem() + "\"" +
+                ",\"quantity\":" + inventoryItem.getQuantity() +
+                ",\"location\":\"" + inventoryItem.getLocation() + "\"}";
+    }
+
+    public static String convertTodo(Todo todo) {
+        return "{\"id\":" + todo.getId() +
+                ",\"description\":\"" + todo.getDescription() + "\"" +
+                ",\"date\":\"" + convertDate(todo.getDate()) + "\"}";
+    }
+
     static String convertDate(GregorianCalendar calendar) {
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH) + 1;

@@ -2,6 +2,7 @@ package planner.commons.helper;
 
 import org.junit.jupiter.api.Test;
 import planner.commons.CalendarItem;
+import planner.commons.InventoryItem;
 import planner.commons.Todo;
 
 import java.util.ArrayList;
@@ -36,6 +37,20 @@ class ClassParserTest {
         List<CalendarItem> calendarItems = ClassParser.parseCalendarList(testString);
         assertTrue(calendarItems.contains(first));
         assertTrue(calendarItems.contains(second));
+    }
+
+    @Test
+    void getInventoryItemTest() {
+        InventoryItem inventoryItem = new InventoryItem(1, "cup", 1, "Fridge");
+        String result = "{\"id\":1,\"item\":\"cup\",\"quantity\":1,\"location\":\"Fridge\"}";
+        assertEquals(inventoryItem, ClassParser.getInventoryItem(result));
+    }
+
+    @Test
+    void getTodoTest() {
+        Todo todo = new Todo(1, "Hello", DateConversion.getDate(2023, 5, 25));
+        String result = "{\"id\":1,\"description\":\"Hello\",\"date\":\"2023-05-25T00:00:00.000+00:00\"}";
+        assertEquals(todo, ClassParser.getTodo(result));
     }
 
     @Test

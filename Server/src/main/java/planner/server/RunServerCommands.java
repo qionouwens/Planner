@@ -13,6 +13,7 @@ import java.util.List;
 
 public class RunServerCommands {
     public static void main(String[] args){
-        TodoDBController.addTodoToCalendar(1, 2);
+        InventoryItem inventoryItem = new InventoryItem(1, "cup", 1, "Fridge");
+        InventoryDBController.addItem(inventoryItem);
     }
 }
