@@ -11,6 +11,7 @@ import planner.client.serverUtils.CalendarServerUtils;
 import planner.commons.CalendarItem;
 import planner.commons.helper.DateConversion;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class SeeCalendarCtrl {
@@ -79,7 +80,7 @@ public class SeeCalendarCtrl {
         GregorianCalendar calendar = DateConversion.getDateFromString(date.getText());
         String colour = colorPicker.getValue().toString();
         colour = colour.replace("0x", "#").substring(0, 7);
-        CalendarItem updatedCalendar = new CalendarItem(calendarItem.getId(), title.getText(), calendar, startTime.getText(), endTime.getText(), colour, null);
+        CalendarItem updatedCalendar = new CalendarItem(calendarItem.getId(), title.getText(), calendar, startTime.getText(), endTime.getText(), colour, new ArrayList<>());
         CalendarServerUtils calendarServerUtils = new CalendarServerUtils();
         calendarServerUtils.updateCalendar(updatedCalendar);
         close();

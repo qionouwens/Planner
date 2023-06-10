@@ -208,7 +208,7 @@ public class CalendarDBController {
             int startTimeMinute = result.getInt("starttime_minute");
             String startString = startTimeMinute < 10 ? startTimeMinute + "0" : String.valueOf(startTimeMinute);
             String startTime = result.getInt("starttime_hour") + ":" + startString;
-            int endTimeMinute = result.getInt("starttime_minute");
+            int endTimeMinute = result.getInt("endtime_minute");
             String endString = endTimeMinute < 10 ? endTimeMinute + "0" : String.valueOf(endTimeMinute);
             String endTime = result.getInt("endtime_hour") + ":" + endString;
             List<Todo> todoList = TodoDBController.getForCalendarItem(result.getInt("calendar_id"));
