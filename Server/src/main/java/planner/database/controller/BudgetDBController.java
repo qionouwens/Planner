@@ -50,23 +50,23 @@ public class BudgetDBController {
     }
 
     public List<ResultCategory> getResultCategory(int year, int month) {
-        String sql = "SELECT c.category_id, name, sum(amount), budget " +
-                "FROM expenseCategory c " +
+        String sql = "SELECT c.category_id, name, sum(amount) AS total, budget " +
+                "   FROM expenseCategory c " +
                 "         LEFT JOIN incomeExpense e ON c.category_id = e.category_id " +
                 "         LEFT JOIN dateTable d ON e.date_id = d.date_id " +
-                "WHERE year = ? AND month = ? AND isIncome = 0 " +
-                "GROUP BY name " +
+                "   WHERE year = ? AND month = ? AND isIncome = 0 " +
+                "   GROUP BY name " +
                 "UNION " +
-                "SELECT category_id, name, 0, budget " +
-                "FROM expenseCategory c " +
-                "WHERE budget > 0 " +
+                "   SELECT category_id, name, 0, budget " +
+                "       FROM expenseCategory c " +
+                "   WHERE budget > 0 " +
                 "EXCEPT " +
-                "SELECT c.category_id, name, 0, budget " +
-                "FROM expenseCategory c " +
-                "    LEFT JOIN incomeExpense e ON c.category_id = e.category_id " +
-                "    LEFT JOIN dateTable d ON e.date_id = d.date_id " +
-                "WHERE year = ? AND month = ? AND isIncome = 0 " +
-                "GROUP BY name";
+                "   SELECT c.category_id, name, 0, budget " +
+                "   FROM expenseCategory c " +
+                "       LEFT JOIN incomeExpense e ON c.category_id = e.category_id " +
+                "       LEFT JOIN dateTable d ON e.date_id = d.date_id " +
+                "   WHERE year = ? AND month = ? AND isIncome = 0 " +
+                "   GROUP BY name";
         try {
             PreparedStatement stmt;
             stmt = connect.getConnection().prepareStatement(sql);
